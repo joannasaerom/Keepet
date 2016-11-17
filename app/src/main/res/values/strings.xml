@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">PetTracker</string>
+    <string name="title_activity_medication">MedicationActivity</string>
+</resources>

@@ -19,8 +19,9 @@
         <activity android:name=".WeightActivity" />
         <activity android:name=".MedicationActivity" />
         <activity android:name=".MedicationDetailActivity" />
-        <activity android:name=".SearchMedicationActivity" />
-        <activity android:name=".VetActivity"></activity>
+        <activity android:name=".VetActivity" />
+        <activity android:name=".NewMedicationActivity" />
+        <activity android:name=".NewPetActivity"></activity>
     </application>
 
 </manifest>

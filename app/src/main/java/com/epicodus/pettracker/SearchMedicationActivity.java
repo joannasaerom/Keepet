@@ -8,18 +8,18 @@ import android.widget.ListView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MedicationActivity extends AppCompatActivity {
-    @Bind(R.id.medicationList) ListView mMedicationList;
+public class SearchMedicationActivity extends AppCompatActivity {
     private String[] medications = new String[] {"Nexxguard", "HeartGuard", "Test Medication1", "Test Medication2"};
+    @Bind(R.id.searchMedicationList) ListView mSearchMedicationList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_medication);
+        setContentView(R.layout.activity_search_medication);
 
         ButterKnife.bind(this);
 
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, medications);
-        mMedicationList.setAdapter(adapter);
+        mSearchMedicationList.setAdapter(adapter);
     }
 }

@@ -37,7 +37,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(MainActivity.this, WeightActivity.class);
             startActivity(intent);
         } else if(v == mMedicationButton){
-            Intent intent = new Intent(MainActivity.this, )
+            Intent intent = new Intent(MainActivity.this, MedicationActivity.class);
+            startActivity(intent);
         }
     }
 }

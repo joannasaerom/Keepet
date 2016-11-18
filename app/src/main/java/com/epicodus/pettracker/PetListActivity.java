@@ -3,7 +3,9 @@ package com.epicodus.pettracker;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -13,6 +15,7 @@ import butterknife.ButterKnife;
 
 public class PetListActivity extends AppCompatActivity {
     @Bind(R.id.petList) ListView mPetList;
+    @Bind(R.id.addPet) ImageView mAddPetButton;
     ArrayList<Pet> pets = new ArrayList<Pet>();
 
     @Override
@@ -25,13 +28,25 @@ public class PetListActivity extends AppCompatActivity {
         Pet juniper = new Pet("Juniper", "December 24", "Female");
         pets.add(juniper);
 
-
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, pets);
         mPetList.setAdapter(adapter);
 
         Intent intent = getIntent();
-        if (intent !=null){
-            Pet newPet = (Pet) intent.getSerializableExtra("newPet");
+        Pet newPet = (Pet) intent.getSerializableExtra("newPet");
+        if (newPet !=null){
+            pets.add(newPet);
         }
+
+        mAddPetButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(PetListActivity.this, NewPetActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
+
+
 }

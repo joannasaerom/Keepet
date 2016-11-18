@@ -21,7 +21,8 @@
         <activity android:name=".MedicationDetailActivity" />
         <activity android:name=".VetActivity" />
         <activity android:name=".NewMedicationActivity" />
-        <activity android:name=".NewPetActivity"></activity>
+        <activity android:name=".NewPetActivity" />
+        <activity android:name=".PetListActivity"></activity>
     </application>
 
 </manifest>

@@ -10,17 +10,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:hint="Name"
-        android:ems="10"
-        android:layout_marginTop="30dp"
-        android:id="@+id/petName"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
         android:hint="Male or Female"
         android:ems="10"
         android:layout_marginTop="15dp"
@@ -39,14 +28,25 @@
         android:layout_alignStart="@+id/gender"
         android:layout_marginTop="15dp" />
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Name"
+        android:ems="10"
+        android:layout_marginTop="43dp"
+        android:id="@+id/petName"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
     <Button
         android:text="Add Pet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/addPet"
-        android:layout_alignTop="@+id/birthDate"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/birthDate"
+        android:layout_centerHorizontal="true" />
 
     <!--<Spinner-->
         <!--android:layout_width="match_parent"-->

@@ -23,12 +23,14 @@ public class PetListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pet_list);
 
+
         ButterKnife.bind(this);
 
         Pet juniper = new Pet("Juniper", "December 24", "Female");
         pets.add(juniper);
 
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, pets);
+        adapter.notifyDataSetChanged();
         mPetList.setAdapter(adapter);
 
         Intent intent = getIntent();

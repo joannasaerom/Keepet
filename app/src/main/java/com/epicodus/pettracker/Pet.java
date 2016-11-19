@@ -38,4 +38,7 @@ public class Pet implements Serializable {
     public void setGender(String _gender){
         this.gender = _gender;
     }
+    public String toString(){
+        return name;
+    }
 }

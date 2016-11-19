@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class PetListActivity extends AppCompatActivity {
+public class PetListActivity extends AppCompatActivity implements View.OnClickListener{
     @Bind(R.id.petList) ListView mPetList;
     @Bind(R.id.addPet) ImageView mAddPetButton;
     ArrayList<Pet> pets = new ArrayList<Pet>();
@@ -39,16 +39,21 @@ public class PetListActivity extends AppCompatActivity {
             pets.add(newPet);
         }
 
-        mAddPetButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(PetListActivity.this, NewPetActivity.class);
-                startActivity(intent);
-            }
-        });
+        mAddPetButton.setOnClickListener(this);
+//        mPetList.setOnClickListener(this);
+
 
 
     }
-
+    @Override
+    public void onClick(View v){
+        if(v == mAddPetButton) {
+            Intent intent = new Intent(PetListActivity.this, NewPetActivity.class);
+            startActivity(intent);
+        } else if(v == mPetList){
+            Intent intent = new Intent(PetListActivity.this, MainActivity.class);
+            //Figure out what goes here
+        }
+    }
 
 }

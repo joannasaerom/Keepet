@@ -21,7 +21,6 @@ public class NewPetActivity extends AppCompatActivity {
     @Bind(R.id.gender) EditText mGender;
     @Bind(R.id.addPet) Button mAddPet;
 
-    public static final String TAG = NewPetActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

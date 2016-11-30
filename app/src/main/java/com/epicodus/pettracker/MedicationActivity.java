@@ -13,10 +13,11 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+
 public class MedicationActivity extends AppCompatActivity implements View.OnClickListener {
     @Bind(R.id.medicationList) ListView mMedicationList;
     @Bind(R.id.newMedication) ImageView mNewMedication;
-    ArrayList<Medication> medications = new ArrayList<Medication>();
+    ArrayList<Medication> medications = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

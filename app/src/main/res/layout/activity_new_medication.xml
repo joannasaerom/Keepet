@@ -10,7 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.epicodus.pettracker.NewMedicationActivity">
 
-    <TextView
+    <EditText
         android:hint="Medication Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
         android:layout_marginTop="99dp"
         android:id="@+id/medicationName" />
 
-    <TextView
+    <EditText
         android:hint="Medication Details"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,8 +29,8 @@
         android:layout_marginTop="12dp"
         android:id="@+id/medicationDetails" />
 
-    <TextView
-        android:text="Reminder"
+    <EditText
+        android:hint="Reminder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/medicationDetails"

@@ -10,6 +10,7 @@ import android.widget.EditText;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+
 public class NewMedicationActivity extends AppCompatActivity {
     @Bind(R.id.medicationName) EditText mMedicationName;
     @Bind(R.id.medicationDetails) EditText mMedicationDetail;

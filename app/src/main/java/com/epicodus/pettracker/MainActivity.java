@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Bind(R.id.weightButton) Button mWeightButton;
     @Bind(R.id.medicationButton) Button mMedicationButton;
     @Bind(R.id.addPet) ImageView mAddPet;
+    @Bind(R.id.vetButton) Button mVetButton;
 
 
     @Override
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mMedicationButton.setOnClickListener(this);
         mAddPet.setClickable(true);
         mAddPet.setOnClickListener(this);
+        mVetButton.setOnClickListener(this);
     }
 
     @Override
@@ -46,6 +48,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         } else if (v == mAddPet){
             Intent intent = new Intent(MainActivity.this, PetListActivity.class);
+            startActivity(intent);
+        } else if (v == mVetButton){
+            Intent intent = new Intent(MainActivity.this, VetActivity.class);
             startActivity(intent);
         }
     }

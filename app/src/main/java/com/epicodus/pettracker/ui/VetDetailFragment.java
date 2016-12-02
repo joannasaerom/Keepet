@@ -1,6 +1,8 @@
 package com.epicodus.pettracker.ui;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -21,7 +23,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class VetDetailFragment extends Fragment {
+public class VetDetailFragment extends Fragment implements View.OnClickListener{
     private static final int MAX_WIDTH = 400;
     private static final int MAX_HEIGHT = 300;
     @Bind(R.id.vetImageView) ImageView mImageLabel;
@@ -60,12 +62,35 @@ public class VetDetailFragment extends Fragment {
                 .centerCrop()
                 .into(mImageLabel);
 
+        mWebsiteLabel.setOnClickListener(this);
+        mPhoneLabel.setOnClickListener(this);
+        mAddressLabel.setOnClickListener(this);
+
         mNameLabel.setText(mVet.getName());
         mRatingLabel.setText(Double.toString(mVet.getRating()) + "/5");
         mPhoneLabel.setText(mVet.getPhone());
         mAddressLabel.setText(android.text.TextUtils.join(", ", mVet.getAddress()));
 
         return view;
+    }
+
+    @Override
+    public void onClick(View v){
+        if (v == mWebsiteLabel) {
+            Intent webIntent = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse(mVet.getWebsite()));
+            startActivity(webIntent);
+        }
+        if (v == mPhoneLabel){
+            Intent phoneIntent = new Intent(Intent.ACTION_DIAL,
+                    Uri.parse("tel:" + mVet.getPhone()));
+            startActivity(phoneIntent);
+        }
+        if (v == mAddressLabel){
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("geo:" + mVet.getLatitude() + "," + mVet.getLongitude() + "?q=(" + mVet.getName() + ")"));
+            startActivity(mapIntent);
+        }
     }
 
 }

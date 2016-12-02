@@ -1,12 +1,14 @@
 package com.epicodus.pettracker;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -16,6 +18,7 @@ import butterknife.ButterKnife;
 public class PetListActivity extends AppCompatActivity implements View.OnClickListener{
     @Bind(R.id.petList) ListView mPetList;
     @Bind(R.id.addPet) ImageView mAddPetButton;
+    @Bind(R.id.pageTitle) TextView mPageTitle;
     ArrayList<Pet> pets = new ArrayList<Pet>();
 
     @Override
@@ -25,6 +28,9 @@ public class PetListActivity extends AppCompatActivity implements View.OnClickLi
 
 
         ButterKnife.bind(this);
+
+        Typeface rampung = Typeface.createFromAsset(getAssets(), "fonts/Rampung.ttf");
+        mPageTitle.setTypeface(rampung);
 
         Pet juniper = new Pet("Juniper", "December 24", "Female");
         pets.add(juniper);

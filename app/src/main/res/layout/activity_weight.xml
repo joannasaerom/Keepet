@@ -25,7 +25,7 @@
         android:textColor="@color/colorText"
         android:layout_alignBottom="@+id/todayDate"
         android:layout_toEndOf="@+id/todayDate"
-        android:id="@+id/editText2" />
+        android:id="@+id/weight" />
 
     <Button
         android:text="Add Weight"

@@ -18,6 +18,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Bind(R.id.weightButton) Button mWeightButton;
     @Bind(R.id.medicationButton) Button mMedicationButton;
     @Bind(R.id.addPet) ImageView mAddPet;
+    @Bind(R.id.petName) TextView mPetName;
+    @Bind(R.id.birthDate) TextView mBirthDate;
     @Bind(R.id.vetButton) Button mVetButton;
 
 
@@ -30,6 +32,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 //        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
 //        setSupportActionBar(myToolbar);
+
+        Typeface rampung = Typeface.createFromAsset(getAssets(), "fonts/Rampung.ttf");
+        mPetName.setTypeface(rampung);
+        mBirthDate.setTypeface(rampung);
+        mWeightButton.setTypeface(rampung);
+        mMedicationButton.setTypeface(rampung);
+        mVetButton.setTypeface(rampung);
 
         mWeightButton.setOnClickListener(this);
         mMedicationButton.setOnClickListener(this);

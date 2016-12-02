@@ -1,11 +1,14 @@
 package com.epicodus.pettracker;
 
+import org.parceler.Parcel;
+
 import java.util.ArrayList;
 
 /**
  * Created by joannaanderson on 11/30/16.
  */
 
+@Parcel
 public class Vet {
     String mName;
     String mPhone;
@@ -15,6 +18,8 @@ public class Vet {
     ArrayList<String> mAddress = new ArrayList<>();
     double mLatitude;
     double mLongitude;
+
+    public Vet() {}
 
     public Vet(String name, String phone, String website, double rating, String imageUrl, ArrayList<String> address, double latitude, double longitude){
         this.mName = name;

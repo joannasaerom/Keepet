@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.epicodus.pettracker">
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -23,7 +24,8 @@
         <activity android:name=".VetActivity" />
         <activity android:name=".NewMedicationActivity" />
         <activity android:name=".NewPetActivity" />
-        <activity android:name=".PetListActivity"></activity>
+        <activity android:name=".PetListActivity" />
+        <activity android:name=".ui.VetDetailActivity"></activity>
     </application>
 
 </manifest>

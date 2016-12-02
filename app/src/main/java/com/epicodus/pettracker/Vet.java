@@ -48,7 +48,7 @@ public class Vet {
     public double getLatitude(){
         return mLatitude;
     }
-    public double getmLongitude(){
+    public double getLongitude(){
         return mLongitude;
     }
 }

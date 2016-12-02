@@ -62,13 +62,9 @@ public class VetActivity extends AppCompatActivity implements View.OnClickListen
 
             @Override
             public void onResponse(Call call, Response response) {
-                try{
-                    Log.d("VetActivity", response.body().string());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
 
                 mVets = yelpService.processResults(response);
+
 
                 VetActivity.this.runOnUiThread(new Runnable(){
                     @Override
@@ -80,9 +76,6 @@ public class VetActivity extends AppCompatActivity implements View.OnClickListen
                         mVetList.setLayoutManager(layoutManager);
                         mVetList.setHasFixedSize(true);
 
-                        for (Vet vet : mVets ){
-                            Log.d(TAG, "Name " + vet.getName());
-                        }
                     }
                 });
 

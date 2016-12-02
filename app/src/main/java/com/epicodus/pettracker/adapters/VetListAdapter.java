@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.epicodus.pettracker.R;
 import com.epicodus.pettracker.Vet;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -62,6 +63,8 @@ public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.VetViewH
         public void bindVet(Vet vet){
             mVetNameText.setText(vet.getName());
             mRatingTextView.setText("Rating: " + vet.getRating() + "/5");
+            Picasso.with(mContext).load(vet.getImageUrl())
+                    .into(mVetImageView);
         }
     }
 }

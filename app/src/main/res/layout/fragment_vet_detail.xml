@@ -2,13 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     tools:context="com.epicodus.pettracker.ui.VetDetailFragment">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorAccent">
+        android:background="@color/colorBackground">
 
         <ImageView
             android:layout_width="match_parent"
@@ -20,7 +21,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
+            android:background="@color/colorBackground"
             android:paddingTop="20dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
@@ -34,7 +35,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:textSize="20sp"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/colorText"
                 android:textStyle="bold" />
 
             <TextView
@@ -45,7 +46,7 @@
                 android:layout_alignTop="@+id/vetNameTextView"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/colorText"
                 android:textStyle="bold" />
 
         </RelativeLayout>
@@ -72,7 +73,7 @@
                     android:id="@+id/websiteTextView"
                     android:drawableLeft="@drawable/ic_exit_to_app_black_24dp"
                     android:drawablePadding="4dp"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorText"
                     android:textSize="15sp"
                     android:textStyle="bold"
                     android:layout_marginBottom="10dp"
@@ -85,7 +86,7 @@
                     android:id="@+id/phoneTextView"
                     android:drawableLeft="@drawable/ic_local_phone_black_24dp"
                     android:drawablePadding="4dp"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorText"
                     android:textSize="15sp"
                     android:textStyle="bold"
                     android:layout_marginBottom="10dp"
@@ -98,7 +99,7 @@
                     android:drawableLeft="@drawable/ic_map_black_24dp"
                     android:drawablePadding="4dp"
                     android:id="@+id/addressTextView"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorText"
                     android:textSize="15sp"
                     android:textStyle="bold"
                     android:layout_marginBottom="10dp"

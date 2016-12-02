@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_pet_list"
+    android:background="@color/colorBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.epicodus.pettracker.PetListActivity">
@@ -11,6 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/newMedication"
+        android:cacheColorHint="@color/colorText"
+        android:background="@color/colorBackground"
         android:layout_alignParentStart="true"
         android:layout_marginTop="100dp"
         android:id="@+id/petList"/>
@@ -29,6 +32,7 @@
         android:text="Pets"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorText"
         android:id="@+id/pageTitle"
         android:layout_alignBottom="@+id/addPet"
         android:layout_alignParentStart="true" />

@@ -4,6 +4,7 @@
     android:id="@+id/activity_weight"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     tools:context="com.epicodus.pettracker.WeightActivity">
 
     <com.jjoe64.graphview.GraphView
@@ -19,7 +20,9 @@
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
+        android:textColorHint="@color/colorText"
         android:hint="Weight"
+        android:textColor="@color/colorText"
         android:layout_alignBottom="@+id/todayDate"
         android:layout_toEndOf="@+id/todayDate"
         android:id="@+id/editText2" />
@@ -29,6 +32,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button"
+        android:background="@color/colorBackground"
+        android:textColor="@color/colorText"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="70dp" />
@@ -39,6 +44,8 @@
         android:inputType="date"
         android:ems="10"
         android:hint="Today's Date"
+        android:textColor="@color/colorText"
+        android:textColorHint="@color/colorText"
         android:id="@+id/todayDate"
         android:layout_above="@+id/button"
         android:layout_alignParentStart="true"

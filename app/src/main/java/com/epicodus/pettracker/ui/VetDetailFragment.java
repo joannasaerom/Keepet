@@ -22,6 +22,8 @@ import butterknife.ButterKnife;
  * A simple {@link Fragment} subclass.
  */
 public class VetDetailFragment extends Fragment {
+    private static final int MAX_WIDTH = 400;
+    private static final int MAX_HEIGHT = 300;
     @Bind(R.id.vetImageView) ImageView mImageLabel;
     @Bind(R.id.vetNameTextView) TextView mNameLabel;
     @Bind(R.id.ratingTextView) TextView mRatingLabel;
@@ -54,6 +56,8 @@ public class VetDetailFragment extends Fragment {
 
         Picasso.with(view.getContext())
                 .load(mVet.getImageUrl())
+                .resize(MAX_WIDTH, MAX_HEIGHT)
+                .centerCrop()
                 .into(mImageLabel);
 
         mNameLabel.setText(mVet.getName());

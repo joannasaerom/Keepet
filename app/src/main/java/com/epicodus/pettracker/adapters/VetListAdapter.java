@@ -26,6 +26,9 @@ import butterknife.ButterKnife;
  */
 
 public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.VetViewHolder> {
+    private static final int MAX_WIDTH = 200;
+    private static final int MAX_HEIGHT= 200;
+
     private ArrayList<Vet> mVets = new ArrayList<>();
     private Context mContext;
 
@@ -78,7 +81,10 @@ public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.VetViewH
         public void bindVet(Vet vet){
             mVetNameText.setText(vet.getName());
             mRatingTextView.setText("Rating: " + vet.getRating() + "/5");
-            Picasso.with(mContext).load(vet.getImageUrl())
+            Picasso.with(mContext)
+                    .load(vet.getImageUrl())
+                    .resize(MAX_WIDTH, MAX_HEIGHT)
+                    .centerCrop()
                     .into(mVetImageView);
         }
     }

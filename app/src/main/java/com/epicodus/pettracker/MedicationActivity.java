@@ -1,12 +1,14 @@
 package com.epicodus.pettracker;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -17,6 +19,7 @@ import butterknife.ButterKnife;
 public class MedicationActivity extends AppCompatActivity implements View.OnClickListener {
     @Bind(R.id.medicationList) ListView mMedicationList;
     @Bind(R.id.newMedication) ImageView mNewMedication;
+    @Bind(R.id.pageTitle) TextView mPageTitle;
     ArrayList<Medication> medications = new ArrayList<>();
 
     @Override
@@ -28,6 +31,10 @@ public class MedicationActivity extends AppCompatActivity implements View.OnClic
         medications.add(heartguard);
 
         ButterKnife.bind(this);
+
+        Typeface rampung = Typeface.createFromAsset(getAssets(), "fonts/Rampung.ttf");
+        mPageTitle.setTypeface(rampung);
+
 
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, medications);
         adapter.notifyDataSetChanged();

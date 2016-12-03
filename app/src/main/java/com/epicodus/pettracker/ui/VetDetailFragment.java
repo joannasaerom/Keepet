@@ -2,6 +2,7 @@ package com.epicodus.pettracker.ui;
 
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -55,6 +56,13 @@ public class VetDetailFragment extends Fragment implements View.OnClickListener{
 
         View view = inflater.inflate(R.layout.fragment_vet_detail, container, false);
         ButterKnife.bind(this, view);
+
+        Typeface rampung = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Rampung.ttf");
+        mNameLabel.setTypeface(rampung);
+        mRatingLabel.setTypeface(rampung);
+        mWebsiteLabel.setTypeface(rampung);
+        mPhoneLabel.setTypeface(rampung);
+        mAddressLabel.setTypeface(rampung);
 
         Picasso.with(view.getContext())
                 .load(mVet.getImageUrl())

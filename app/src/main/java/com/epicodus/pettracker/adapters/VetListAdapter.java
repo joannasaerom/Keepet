@@ -2,6 +2,7 @@ package com.epicodus.pettracker.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,12 +60,15 @@ public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.VetViewH
         @Bind(R.id.vetNameTextView) TextView mVetNameText;
         @Bind(R.id.ratingTextView) TextView mRatingTextView;
 
+
+
         private Context mContext;
 
         public VetViewHolder(View itemView){
             super(itemView);
             ButterKnife.bind(this, itemView);
             mContext = itemView.getContext();
+
 
             itemView.setOnClickListener(this);
         }
@@ -79,6 +83,8 @@ public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.VetViewH
         }
 
         public void bindVet(Vet vet){
+
+
             mVetNameText.setText(vet.getName());
             mRatingTextView.setText("Rating: " + vet.getRating() + "/5");
             Picasso.with(mContext)

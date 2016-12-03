@@ -1,5 +1,6 @@
 package com.epicodus.pettracker;
 
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -37,6 +38,10 @@ public class VetActivity extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.activity_vet);
 
         ButterKnife.bind(this);
+
+        Typeface rampung = Typeface.createFromAsset(getAssets(), "fonts/Rampung.ttf");
+        mZipcode.setTypeface(rampung);
+        mSearchButton.setTypeface(rampung);
 
         mSearchButton.setOnClickListener(this);
     }

@@ -1,4 +1,4 @@
-package com.epicodus.pettracker;
+package com.epicodus.pettracker.ui;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -9,6 +9,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.epicodus.pettracker.R;
+import com.epicodus.pettracker.models.Pet;
 
 import java.util.ArrayList;
 

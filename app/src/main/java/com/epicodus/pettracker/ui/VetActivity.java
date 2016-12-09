@@ -1,6 +1,8 @@
-package com.epicodus.pettracker;
+package com.epicodus.pettracker.ui;
 
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,7 +12,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.epicodus.pettracker.Constants;
+import com.epicodus.pettracker.R;
 import com.epicodus.pettracker.adapters.VetListAdapter;
+import com.epicodus.pettracker.models.Vet;
+import com.epicodus.pettracker.services.YelpService;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,12 +29,16 @@ import okhttp3.Response;
 
 public class VetActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private VetListAdapter mAdapter;
+
     @Bind(R.id.zipCode) EditText mZipcode;
     @Bind(R.id.searchButton) Button mSearchButton;
     @Bind(R.id.vetList) RecyclerView mVetList;
 
     public ArrayList<Vet> mVets = new ArrayList<>();
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
+    private VetListAdapter mAdapter;
+    private String mRecentAddress;
 
     public static final String TAG = VetActivity.class.getSimpleName();
 
@@ -43,6 +53,14 @@ public class VetActivity extends AppCompatActivity implements View.OnClickListen
         mZipcode.setTypeface(rampung);
         mSearchButton.setTypeface(rampung);
 
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mSharedPreferences.edit();
+        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
+
+        if (mRecentAddress != null){
+            getVets(mRecentAddress);
+        }
+
         mSearchButton.setOnClickListener(this);
     }
 
@@ -50,7 +68,10 @@ public class VetActivity extends AppCompatActivity implements View.OnClickListen
     public void onClick(View v){
         if(v == mSearchButton){
             String location = mZipcode.getText().toString();
-            Log.d(TAG, location);
+            if(!(location).equals("")){
+                addToSharedPreferences(location);
+            }
+
             getVets(location);
         }
     }
@@ -86,5 +107,9 @@ public class VetActivity extends AppCompatActivity implements View.OnClickListen
 
             }
         });
+    }
+
+    private void addToSharedPreferences(String location){
+        mEditor.putString(Constants.PREFERENCES_LOCATION_KEY, location).apply();
     }
 }

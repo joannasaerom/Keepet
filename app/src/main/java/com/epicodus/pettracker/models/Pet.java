@@ -1,4 +1,4 @@
-package com.epicodus.pettracker;
+package com.epicodus.pettracker.models;
 
 import java.io.Serializable;
 

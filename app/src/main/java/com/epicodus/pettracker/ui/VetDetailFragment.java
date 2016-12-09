@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.epicodus.pettracker.R;
-import com.epicodus.pettracker.Vet;
+import com.epicodus.pettracker.models.Vet;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;

@@ -11,20 +11,20 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".WeightActivity" />
-        <activity android:name=".MedicationActivity" />
-        <activity android:name=".MedicationDetailActivity" />
-        <activity android:name=".VetActivity" />
-        <activity android:name=".NewMedicationActivity" />
-        <activity android:name=".NewPetActivity" />
-        <activity android:name=".PetListActivity" />
+        <activity android:name=".ui.WeightActivity" />
+        <activity android:name=".ui.MedicationActivity" />
+        <activity android:name=".ui.MedicationDetailActivity" />
+        <activity android:name=".ui.VetActivity" />
+        <activity android:name=".ui.NewMedicationActivity" />
+        <activity android:name=".ui.NewPetActivity" />
+        <activity android:name=".ui.PetListActivity" />
         <activity android:name=".ui.VetDetailActivity"></activity>
     </application>
 

@@ -6,7 +6,7 @@
     android:background="@color/colorBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.epicodus.pettracker.MainActivity">
+    tools:context="com.epicodus.pettracker.ui.MainActivity">
 
 
     <!--<android.support.v7.widget.Toolbar-->

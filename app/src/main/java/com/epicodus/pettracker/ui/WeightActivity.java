@@ -1,4 +1,4 @@
-package com.epicodus.pettracker;
+package com.epicodus.pettracker.ui;
 
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.epicodus.pettracker.R;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "293315366741",
+    "firebase_url": "https://pettracker-bacca.firebaseio.com",
+    "project_id": "pettracker-bacca",
+    "storage_bucket": "pettracker-bacca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:293315366741:android:7c24b808217410ff",
+        "android_client_info": {
+          "package_name": "com.epicodus.pettracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "293315366741-fd60qdkkshodfpo41pir0rhnf19fumoh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.epicodus.pettracker",
+            "certificate_hash": "65D155E79BE9B08F30B173BA5B3663A731083344"
+          }
+        },
+        {
+          "client_id": "293315366741-jt72ocio9o3802qlqljpp8v76elfks89.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCErZcz5HoVXhvsgYtcrhhKMH6S3GGbLz8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "293315366741-jt72ocio9o3802qlqljpp8v76elfks89.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

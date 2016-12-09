@@ -1,15 +1,14 @@
-package com.epicodus.pettracker;
+package com.epicodus.pettracker.ui;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
+
+import com.epicodus.pettracker.R;
+import com.epicodus.pettracker.models.Pet;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

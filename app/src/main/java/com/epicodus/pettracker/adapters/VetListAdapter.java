@@ -2,7 +2,6 @@ package com.epicodus.pettracker.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.epicodus.pettracker.R;
-import com.epicodus.pettracker.Vet;
+import com.epicodus.pettracker.models.Vet;
 import com.epicodus.pettracker.ui.VetDetailActivity;
 import com.squareup.picasso.Picasso;
 

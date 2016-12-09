@@ -1,7 +1,8 @@
-package com.epicodus.pettracker;
+package com.epicodus.pettracker.services;
 
 
-import android.util.Log;
+import com.epicodus.pettracker.Constants;
+import com.epicodus.pettracker.models.Vet;
 
 import org.json.JSONArray;
 import org.json.JSONException;

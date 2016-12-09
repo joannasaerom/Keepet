@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.epicodus.pettracker.NewMedicationActivity">
+    tools:context="com.epicodus.pettracker.ui.NewMedicationActivity">
 
     <EditText
         android:hint="Medication Name"

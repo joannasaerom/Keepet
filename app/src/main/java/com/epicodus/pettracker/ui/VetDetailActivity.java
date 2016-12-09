@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.epicodus.pettracker.R;
-import com.epicodus.pettracker.Vet;
+import com.epicodus.pettracker.models.Vet;
 import com.epicodus.pettracker.adapters.VetPagerAdapter;
 
 import org.parceler.Parcels;

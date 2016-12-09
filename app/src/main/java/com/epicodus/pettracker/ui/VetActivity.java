@@ -3,11 +3,16 @@ package com.epicodus.pettracker.ui;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.preference.PreferenceManager;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,11 +32,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class VetActivity extends AppCompatActivity implements View.OnClickListener{
-
-
-    @Bind(R.id.zipCode) EditText mZipcode;
-    @Bind(R.id.searchButton) Button mSearchButton;
+public class VetActivity extends AppCompatActivity {
     @Bind(R.id.vetList) RecyclerView mVetList;
 
     public ArrayList<Vet> mVets = new ArrayList<>();
@@ -50,30 +51,46 @@ public class VetActivity extends AppCompatActivity implements View.OnClickListen
         ButterKnife.bind(this);
 
         Typeface rampung = Typeface.createFromAsset(getAssets(), "fonts/Rampung.ttf");
-        mZipcode.setTypeface(rampung);
-        mSearchButton.setTypeface(rampung);
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mEditor = mSharedPreferences.edit();
         mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
 
         if (mRecentAddress != null){
             getVets(mRecentAddress);
         }
-
-        mSearchButton.setOnClickListener(this);
     }
 
     @Override
-    public void onClick(View v){
-        if(v == mSearchButton){
-            String location = mZipcode.getText().toString();
-            if(!(location).equals("")){
-                addToSharedPreferences(location);
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_search, menu);
+        ButterKnife.bind(this);
+
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mEditor = mSharedPreferences.edit();
+
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query){
+                addToSharedPreferences(query);
+                getVets(query);
+                return false;
             }
 
-            getVets(location);
-        }
+            @Override
+            public boolean onQueryTextChange(String newText){
+                return false;
+            }
+        });
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        return super.onOptionsItemSelected(item);
     }
 
     private void getVets(String location){
@@ -101,7 +118,6 @@ public class VetActivity extends AppCompatActivity implements View.OnClickListen
                                 new LinearLayoutManager(VetActivity.this);
                         mVetList.setLayoutManager(layoutManager);
                         mVetList.setHasFixedSize(true);
-
                     }
                 });
 

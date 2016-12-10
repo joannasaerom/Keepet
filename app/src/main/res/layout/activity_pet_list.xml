@@ -8,15 +8,11 @@
     android:layout_height="match_parent"
     tools:context="com.epicodus.pettracker.ui.PetListActivity">
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/newMedication"
-        android:cacheColorHint="@color/colorText"
-        android:background="@color/colorBackground"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="100dp"
-        android:id="@+id/petList"/>
+        android:layout_below="@id/pageTitle"
+        android:id="@+id/recyclerView"/>
 
 
     <ImageView

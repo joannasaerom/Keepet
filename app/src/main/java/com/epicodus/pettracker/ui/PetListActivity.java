@@ -4,25 +4,32 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
+import com.epicodus.pettracker.Constants;
 import com.epicodus.pettracker.R;
+import com.epicodus.pettracker.adapters.FirebasePetViewHolder;
 import com.epicodus.pettracker.models.Pet;
-
-import java.util.ArrayList;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class PetListActivity extends AppCompatActivity implements View.OnClickListener{
-    @Bind(R.id.petList) ListView mPetList;
     @Bind(R.id.addPet) ImageView mAddPetButton;
     @Bind(R.id.pageTitle) TextView mPageTitle;
-    ArrayList<Pet> pets = new ArrayList<Pet>();
+    @Bind(R.id.recyclerView) RecyclerView mPetList;
+
+    private DatabaseReference mPetReference;
+    private FirebaseRecyclerAdapter mFirebaseAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,23 +42,15 @@ public class PetListActivity extends AppCompatActivity implements View.OnClickLi
         Typeface rampung = Typeface.createFromAsset(getAssets(), "fonts/Rampung.ttf");
         mPageTitle.setTypeface(rampung);
 
-        Pet juniper = new Pet("Juniper", "December 24", "Female");
-        pets.add(juniper);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
 
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, pets);
-        adapter.notifyDataSetChanged();
-        mPetList.setAdapter(adapter);
-
-        Intent intent = getIntent();
-        Pet newPet = (Pet) intent.getSerializableExtra("newPet");
-        if (newPet !=null){
-            pets.add(newPet);
-        }
-
+        mPetReference = FirebaseDatabase
+                .getInstance()
+                .getReference(Constants.FIREBASE_CHILD_PETS)
+                .child(uid);
+        setUpFirebaseAdapter();
         mAddPetButton.setOnClickListener(this);
-//        mPetList.setOnClickListener(this);
-
-
 
     }
     @Override
@@ -59,10 +58,24 @@ public class PetListActivity extends AppCompatActivity implements View.OnClickLi
         if(v == mAddPetButton) {
             Intent intent = new Intent(PetListActivity.this, NewPetActivity.class);
             startActivity(intent);
-        } else if(v == mPetList){
-            Intent intent = new Intent(PetListActivity.this, MainActivity.class);
-            //Figure out what goes here
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mFirebaseAdapter.cleanup();
+    }
+
+    private void setUpFirebaseAdapter() {
+        mFirebaseAdapter = new FirebaseRecyclerAdapter<Pet, FirebasePetViewHolder>(Pet.class, R.layout.pet_list_item, FirebasePetViewHolder.class, mPetReference) {
+            @Override
+            protected void populateViewHolder(FirebasePetViewHolder viewHolder, Pet model, int position) {
+            viewHolder.bindPet(model);
+            }
+        };
+        mPetList.setHasFixedSize(true);
+        mPetList.setLayoutManager(new LinearLayoutManager(this));
+        mPetList.setAdapter(mFirebaseAdapter);
+    }
 }

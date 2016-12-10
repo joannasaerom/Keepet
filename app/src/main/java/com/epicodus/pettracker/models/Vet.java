@@ -18,6 +18,8 @@ public class Vet {
     ArrayList<String> mAddress = new ArrayList<>();
     double mLatitude;
     double mLongitude;
+    String pushId;
+    String petId;
 
     public Vet() {}
 
@@ -59,5 +61,21 @@ public class Vet {
     public String getLargeImageUrl(String imageUrl){
         String largeImageUrl = imageUrl.substring(0, imageUrl.length() -6).concat("o.jpg");
         return largeImageUrl;
+    }
+
+    public String getPetId() {
+        return petId;
+    }
+
+    public void setPetId(String petId) {
+        this.petId = petId;
+    }
+
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
     }
 }

@@ -1,20 +1,28 @@
 package com.epicodus.pettracker.models;
 
+import org.parceler.Parcel;
+
 import java.io.Serializable;
 
 /**
  * Created by joannaanderson on 11/18/16.
  */
 
-public class Medication implements Serializable {
-    private String name;
-    private String detail;
-    private String reminder;
+@Parcel
+public class Medication{
+    String name;
+    String detail;
+    String reminder;
+    String pushId;
+    String petId;
 
-    public Medication(String _name, String _detail, String _reminder){
+    public Medication(){}
+
+    public Medication(String _name, String _detail, String _reminder, String _petId){
         name = _name;
         detail = _detail;
         reminder = _reminder;
+        petId = _petId;
     }
 
     public String getName() {
@@ -43,5 +51,21 @@ public class Medication implements Serializable {
 
     public String toString() {
         return name;
+    }
+
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
+    }
+
+    public String getPetId() {
+        return petId;
+    }
+
+    public void setPetId(String petId) {
+        this.petId = petId;
     }
 }

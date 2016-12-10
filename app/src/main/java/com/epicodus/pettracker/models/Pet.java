@@ -1,44 +1,79 @@
 package com.epicodus.pettracker.models;
 
+import org.parceler.Parcel;
+
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by joannaanderson on 11/18/16.
  */
 
-public class Pet implements Serializable {
-    private String name;
-    private String birthdate;
-    private String gender;
+@Parcel
+public class Pet {
+    String name;
+    Date birthdate;
+    String gender;
+    String userId;
+    String pushId;
+    Vet vet;
+
+    public Pet(){}
 
     //Constructor
-    public Pet(String _name, String _date, String _gender){
+    public Pet(String _name, Date _date, String _gender, String _userId){
         name = _name;
         birthdate = _date;
         gender = _gender;
+        userId = _userId;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getBirthdate(){
+    public Date getBirthdate() {
         return birthdate;
     }
 
-    public String getGender(){
+    public String getGender() {
         return gender;
     }
-    public void setName(String _name){
-        this.name = _name;
+
+    public String getUserId() {
+        return userId;
     }
-    public void setBirthdate(String _birthdate){
-        this.birthdate = _birthdate;
+
+    public String getPushId() {
+        return pushId;
     }
-    public void setGender(String _gender){
-        this.gender = _gender;
+
+    public Vet getVet() {
+        return vet;
     }
-    public String toString(){
-        return name;
+
+    public void setName(String name) {
+        this.name = name;
     }
+
+    public void setBirthdate(Date birthdate) {
+        this.birthdate = birthdate;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
+    }
+
+    public void setVet(Vet vet) {
+        this.vet = vet;
+    }
+
 }

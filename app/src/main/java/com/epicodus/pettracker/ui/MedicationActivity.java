@@ -30,7 +30,7 @@ public class MedicationActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medication);
 
-        Medication heartguard = new Medication("HeartGuard", "Taken for heart worms", "1st Monday of each month");
+        Medication heartguard = new Medication("HeartGuard", "Taken for heart worms", "1st Monday of each month", "petId");
         medications.add(heartguard);
 
         ButterKnife.bind(this);

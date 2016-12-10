@@ -34,10 +34,10 @@ public class NewMedicationActivity extends AppCompatActivity {
                 String detail = mMedicationDetail.getText().toString();
                 String reminder = mReminder.getText().toString();
 
-                Medication newMedication = new Medication(name, detail, reminder);
+//                Medication newMedication = new Medication(name, detail, reminder);
 
                 Intent intent = new Intent(NewMedicationActivity.this, MedicationActivity.class);
-                intent.putExtra("newMedication", newMedication);
+//                intent.putExtra("newMedication", newMedication);
                 startActivity(intent);
             }
         });

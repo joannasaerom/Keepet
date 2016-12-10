@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if (id == R.id.action_search_vet){
             Intent i = new Intent(this, VetActivity.class);
+            i.putExtra("pet", Parcels.wrap("mPet"));
             this.startActivity(i);
         }
         return super.onOptionsItemSelected(item);
@@ -111,9 +112,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(MainActivity.this, PetListActivity.class);
             startActivity(intent);
         } else if (v == mVetButton){
-            Intent intent = new Intent(MainActivity.this, VetActivity.class);
-            intent.putExtra("pet", Parcels.wrap(mPet));
-            startActivity(intent);
+//            Intent intent = new Intent(MainActivity.this, VetActivity.class);
+//            intent.putExtra("pet", Parcels.wrap(mPet));
+//            startActivity(intent);
         }
     }
 

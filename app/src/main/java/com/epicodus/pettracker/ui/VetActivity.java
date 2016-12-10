@@ -20,8 +20,11 @@ import android.widget.EditText;
 import com.epicodus.pettracker.Constants;
 import com.epicodus.pettracker.R;
 import com.epicodus.pettracker.adapters.VetListAdapter;
+import com.epicodus.pettracker.models.Pet;
 import com.epicodus.pettracker.models.Vet;
 import com.epicodus.pettracker.services.YelpService;
+
+import org.parceler.Parcels;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -49,6 +52,7 @@ public class VetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_vet);
 
         ButterKnife.bind(this);
+
 
         Typeface rampung = Typeface.createFromAsset(getAssets(), "fonts/Rampung.ttf");
 

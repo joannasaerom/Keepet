@@ -43,26 +43,27 @@ public class NewPetActivity extends AppCompatActivity {
             public void onClick(View v){
                 String name = mPetName.getText().toString();
                 String birthDateText = mBirthdate.getText().toString();
-                DateFormat df = new SimpleDateFormat("mm/dd/yyyy");
-                Date birthDate = new Date();
-                try {
-                    birthDate = df.parse(birthDateText);
-                } catch (ParseException e){
-                    e.printStackTrace();
-                }
                 String gender = mGender.getText().toString();
 
                 if (name.equals("")){
                     mPetName.setError("Please enter a name");
                     return;
                 }
-                if (birthDate.equals("")){
+                if (birthDateText.equals("")){
                     mBirthdate.setError("Please enter your pet's date of birth");
                     return;
                 }
                 if (gender.equals("")){
                     mGender.setError("Please specify your pet's gender");
                     return;
+                }
+
+                DateFormat df = new SimpleDateFormat("mm/dd/yyyy");
+                Date birthDate = new Date();
+                try {
+                    birthDate = df.parse(birthDateText);
+                } catch (ParseException e){
+                    e.printStackTrace();
                 }
 
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

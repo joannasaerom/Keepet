@@ -96,16 +96,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v){
         if(v == mWeightButton) {
             Intent intent = new Intent(MainActivity.this, WeightActivity.class);
+            intent.putExtra("pet", Parcels.wrap(mPet));
             startActivity(intent);
         } else if(v == mMedicationButton){
             Intent intent = new Intent(MainActivity.this, MedicationActivity.class);
-
+            intent.putExtra("pet", Parcels.wrap(mPet));
             startActivity(intent);
         } else if (v == mAddPet){
             Intent intent = new Intent(MainActivity.this, PetListActivity.class);
             startActivity(intent);
         } else if (v == mVetButton){
             Intent intent = new Intent(MainActivity.this, VetActivity.class);
+            intent.putExtra("pet", Parcels.wrap(mPet));
             startActivity(intent);
         }
     }

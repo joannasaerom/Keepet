@@ -12,52 +12,43 @@ import android.widget.TextView;
 
 import com.epicodus.pettracker.R;
 import com.epicodus.pettracker.models.Medication;
+import com.epicodus.pettracker.models.Pet;
 
-import java.util.ArrayList;
+
+import org.parceler.Parcels;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 
 public class MedicationActivity extends AppCompatActivity implements View.OnClickListener {
-    @Bind(R.id.medicationList) ListView mMedicationList;
+
     @Bind(R.id.newMedication) ImageView mNewMedication;
     @Bind(R.id.pageTitle) TextView mPageTitle;
-    ArrayList<Medication> medications = new ArrayList<>();
+
+    private Pet mPet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medication);
 
-        Medication heartguard = new Medication("HeartGuard", "Taken for heart worms", "1st Monday of each month", "petId");
-        medications.add(heartguard);
-
         ButterKnife.bind(this);
 
         Typeface rampung = Typeface.createFromAsset(getAssets(), "fonts/Rampung.ttf");
         mPageTitle.setTypeface(rampung);
 
+        mPet = Parcels.unwrap(getIntent().getParcelableExtra("pet"));
 
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, medications);
-        adapter.notifyDataSetChanged();
-        mMedicationList.setAdapter(adapter);
 
         mNewMedication.setOnClickListener(this);
-
-        Intent intent = getIntent();
-        Medication newMedication = (Medication) intent.getSerializableExtra("newMedication");
-        if (newMedication !=null){
-            medications.add(newMedication);
-        }
-
-
     }
 
     @Override
     public void onClick(View v){
         if(v == mNewMedication) {
             Intent intent = new Intent(MedicationActivity.this, NewMedicationActivity.class);
+            intent.putExtra("pet", Parcels.wrap(mPet));
             startActivity(intent);
         }
     }

@@ -52,6 +52,19 @@ public class NewPetActivity extends AppCompatActivity {
                 }
                 String gender = mGender.getText().toString();
 
+                if (name.equals("")){
+                    mPetName.setError("Please enter a name");
+                    return;
+                }
+                if (birthDate.equals("")){
+                    mBirthdate.setError("Please enter your pet's date of birth");
+                    return;
+                }
+                if (gender.equals("")){
+                    mGender.setError("Please specify your pet's gender");
+                    return;
+                }
+
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 String uid = user.getUid();
 

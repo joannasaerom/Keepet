@@ -3,6 +3,7 @@ package com.epicodus.pettracker.ui;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,6 +39,7 @@ public class NewMedicationActivity extends AppCompatActivity {
 
 
         mPet = Parcels.unwrap(getIntent().getParcelableExtra("pet"));
+        Log.d("NewMed", mPet.getName());
 
         mAddMedicine.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -71,6 +73,7 @@ public class NewMedicationActivity extends AppCompatActivity {
                 Toast.makeText(NewMedicationActivity.this, "Saved", Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(NewMedicationActivity.this, MedicationActivity.class);
+                intent.putExtra("pet", Parcels.wrap(mPet));
                 startActivity(intent);
             }
         });

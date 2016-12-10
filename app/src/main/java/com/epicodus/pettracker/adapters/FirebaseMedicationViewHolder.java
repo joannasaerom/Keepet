@@ -8,10 +8,8 @@ import android.widget.TextView;
 
 import com.epicodus.pettracker.Constants;
 import com.epicodus.pettracker.R;
-import com.epicodus.pettracker.models.Pet;
-import com.epicodus.pettracker.ui.MainActivity;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.epicodus.pettracker.models.Medication;
+import com.epicodus.pettracker.ui.MedicationDetailActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,48 +24,45 @@ import java.util.ArrayList;
  * Created by joannaanderson on 12/9/16.
  */
 
-public class FirebasePetViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
+public class FirebaseMedicationViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
     View mView;
     Context mContext;
-    private Pet mPet;
+    private Medication mMedication;
 
-    public FirebasePetViewHolder(View itemView){
+    public FirebaseMedicationViewHolder(View itemView){
         super(itemView);
         mView = itemView;
         mContext = itemView.getContext();
         itemView.setOnClickListener(this);
     }
 
-    public void bindPet(Pet pet){
-        TextView petNameTextView = (TextView) mView.findViewById(R.id.petName);
+    public void bindMedication(Medication medication){
+        mMedication = medication;
+        TextView medicationNameTextView = (TextView) mView.findViewById(R.id.medicationName);
+        TextView medicationDetailTextView = (TextView) mView.findViewById(R.id.medicationDetails);
 
-        petNameTextView.setText(pet.getName());
+        medicationNameTextView.setText(medication.getName());
+        medicationDetailTextView.setText(medication.getDetail());
     }
 
     @Override
     public void onClick(View v){
-        final ArrayList<Pet> pets = new ArrayList<>();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = user.getUid();
-
+        final ArrayList<Medication> medications = new ArrayList<>();
+        String petId = mMedication.getPetId();
         DatabaseReference ref = FirebaseDatabase
                 .getInstance()
-                .getReference(Constants.FIREBASE_CHILD_PETS)
-                .child(uid);
+                .getReference(Constants.FIREBASE_CHILD_MEDICATIONS)
+                .child(petId);
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    pets.add(snapshot.getValue(Pet.class));
+                    medications.add(snapshot.getValue(Medication.class));
                 }
                 int itemPosition = getLayoutPosition();
-                Intent intent = new Intent(mContext, MainActivity.class);
-                    mPet = pets.get(itemPosition);
-                intent.putExtra("pet", Parcels.wrap(mPet));
-//                intent.putExtra("position", itemPosition + "");
-//                intent.putExtra("pet", Parcels.wrap(pets));
+                Intent intent = new Intent(mContext, MedicationDetailActivity.class);
+                intent.putExtra("medication", Parcels.wrap(mMedication));
                 mContext.startActivity(intent);
             }
 

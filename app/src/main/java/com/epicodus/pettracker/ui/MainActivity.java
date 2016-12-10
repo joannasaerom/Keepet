@@ -101,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else if(v == mMedicationButton){
             Intent intent = new Intent(MainActivity.this, MedicationActivity.class);
             intent.putExtra("pet", Parcels.wrap(mPet));
+            Log.d("MainActivity", mPet.getName());
             startActivity(intent);
         } else if (v == mAddPet){
             Intent intent = new Intent(MainActivity.this, PetListActivity.class);

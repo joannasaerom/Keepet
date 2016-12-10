@@ -30,6 +30,7 @@ public class FirebasePetViewHolder extends RecyclerView.ViewHolder implements Vi
 
     View mView;
     Context mContext;
+    private Pet mPet;
 
     public FirebasePetViewHolder(View itemView){
         super(itemView);
@@ -62,8 +63,10 @@ public class FirebasePetViewHolder extends RecyclerView.ViewHolder implements Vi
                 }
                 int itemPosition = getLayoutPosition();
                 Intent intent = new Intent(mContext, MainActivity.class);
-                intent.putExtra("position", itemPosition + "");
-                intent.putExtra("pets", Parcels.wrap(pets));
+                    mPet = pets.get(itemPosition);
+                intent.putExtra("pet", Parcels.wrap(mPet));
+//                intent.putExtra("position", itemPosition + "");
+//                intent.putExtra("pet", Parcels.wrap(pets));
                 mContext.startActivity(intent);
             }
 

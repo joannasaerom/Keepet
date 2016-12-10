@@ -1,9 +1,14 @@
 package com.epicodus.pettracker.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.icu.text.DateFormat;
+import android.icu.text.SimpleDateFormat;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -12,8 +17,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.epicodus.pettracker.Constants;
 import com.epicodus.pettracker.R;
+import com.epicodus.pettracker.models.Pet;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+
+import org.parceler.Parcels;
+
+import java.util.Date;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -26,6 +38,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Bind(R.id.birthDate) TextView mBirthDate;
     @Bind(R.id.vetButton) Button mVetButton;
 
+    private Pet mPet;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +47,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
+
+        mPet = Parcels.unwrap(getIntent().getParcelableExtra("pet"));
+
+        if (mPet != null){
+            DateFormat df = new SimpleDateFormat("mm/dd/yyyy");
+            Date birthDate = mPet.getBirthdate();
+            String stringDate = df.format(birthDate);
+
+
+            mPetName.setText(mPet.getName() + " | " + mPet.getGender());
+            mBirthDate.setText(stringDate);
+        }
+
 
         Typeface rampung = Typeface.createFromAsset(getAssets(), "fonts/Rampung.ttf");
         mPetName.setTypeface(rampung);
@@ -72,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         } else if(v == mMedicationButton){
             Intent intent = new Intent(MainActivity.this, MedicationActivity.class);
+
             startActivity(intent);
         } else if (v == mAddPet){
             Intent intent = new Intent(MainActivity.this, PetListActivity.class);
@@ -89,4 +117,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
         finish();
     }
+
 }

@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.epicodus.pettracker.Constants;
 import com.epicodus.pettracker.R;
 import com.epicodus.pettracker.models.Pet;
+import com.epicodus.pettracker.models.Vet;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 
@@ -112,9 +113,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(MainActivity.this, PetListActivity.class);
             startActivity(intent);
         } else if (v == mVetButton){
-//            Intent intent = new Intent(MainActivity.this, VetActivity.class);
-//            intent.putExtra("pet", Parcels.wrap(mPet));
-//            startActivity(intent);
+            Vet vet = mPet.getVet();
+            if (vet == null){
+                Intent intent = new Intent(MainActivity.this, VetActivity.class);
+                startActivity(intent);
+            } else{
+                Intent intent = new Intent(MainActivity.this, PetsVetDetailActivity.class);
+                intent.putExtra("pet", Parcels.wrap(mPet));
+                startActivity(intent);
+            }
+
         }
     }
 

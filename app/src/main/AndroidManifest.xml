@@ -11,7 +11,7 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.MainActivity"></activity>
+        <activity android:name=".ui.MainActivity" />
         <activity android:name=".ui.WeightActivity" />
         <activity android:name=".ui.MedicationActivity" />
         <activity android:name=".ui.MedicationDetailActivity" />
@@ -28,6 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.PetsVetDetailActivity"></activity>
     </application>
 
 </manifest>

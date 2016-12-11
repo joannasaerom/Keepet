@@ -1,6 +1,7 @@
 package com.epicodus.pettracker.ui;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
@@ -63,6 +64,8 @@ public class VetDetailFragment extends Fragment implements View.OnClickListener{
         vetDetailFragment.setArguments(args);
         return vetDetailFragment;
     }
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState){

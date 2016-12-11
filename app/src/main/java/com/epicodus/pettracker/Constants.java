@@ -15,4 +15,5 @@ public class Constants {
     public static final String FIREBASE_CHILD_PETS = "pets";
     public static final String FIREBASE_CHILD_MEDICATIONS = "medications";
     public static final String FIREBASE_CHILD_WEIGHTS = "weights";
+    public static final String PREFERENCES_PETPUSHID_KEY = "pushId";
 }

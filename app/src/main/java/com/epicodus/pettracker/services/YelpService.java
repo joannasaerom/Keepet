@@ -53,9 +53,7 @@ public class YelpService {
 
         try{
             String jsonData = response.body().string();
-//            Log.d(TAG, response.body().string());
             if(response.isSuccessful()){
-//                Log.d(TAG, "Made it");
                 JSONObject yelpJSON = new JSONObject(jsonData);
                 JSONArray businessesJSON = yelpJSON.getJSONArray("businesses");
                 for (int i = 0; i < businessesJSON.length(); i++){

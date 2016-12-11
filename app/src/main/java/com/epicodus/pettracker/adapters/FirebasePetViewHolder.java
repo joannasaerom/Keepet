@@ -3,6 +3,7 @@ package com.epicodus.pettracker.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -32,12 +33,18 @@ public class FirebasePetViewHolder extends RecyclerView.ViewHolder implements Vi
     View mView;
     Context mContext;
     private Pet mPet;
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
 
     public FirebasePetViewHolder(View itemView){
         super(itemView);
         mView = itemView;
         mContext = itemView.getContext();
         itemView.setOnClickListener(this);
+
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        mEditor = mSharedPreferences.edit();
+
     }
 
     public void bindPet(Pet pet){
@@ -67,8 +74,7 @@ public class FirebasePetViewHolder extends RecyclerView.ViewHolder implements Vi
                 Intent intent = new Intent(mContext, MainActivity.class);
                     mPet = pets.get(itemPosition);
                 intent.putExtra("pet", Parcels.wrap(mPet));
-//                intent.putExtra("position", itemPosition + "");
-//                intent.putExtra("pet", Parcels.wrap(pets));
+                addToSharedPreferences(mPet.getPushId());
                 mContext.startActivity(intent);
             }
 
@@ -77,5 +83,9 @@ public class FirebasePetViewHolder extends RecyclerView.ViewHolder implements Vi
 
             }
         });
+    }
+
+    public void addToSharedPreferences(String pushId){
+        mEditor.putString(Constants.PREFERENCES_PETPUSHID_KEY, pushId).apply();
     }
 }

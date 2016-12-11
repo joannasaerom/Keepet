@@ -2,21 +2,37 @@ package com.epicodus.pettracker.ui;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.epicodus.pettracker.Constants;
 import com.epicodus.pettracker.R;
+import com.epicodus.pettracker.models.Pet;
 import com.epicodus.pettracker.models.Vet;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -33,7 +49,11 @@ public class VetDetailFragment extends Fragment implements View.OnClickListener{
     @Bind(R.id.websiteTextView) TextView mWebsiteLabel;
     @Bind(R.id.phoneTextView) TextView mPhoneLabel;
     @Bind(R.id.addressTextView) TextView mAddressLabel;
+    @Bind(R.id.saveVet) Button mSaveVetButton;
 
+    private SharedPreferences mSharedPreferences;
+    private String mPetPushId;
+    private Pet currentPet;
     private Vet mVet;
 
     public static VetDetailFragment newInstance(Vet vet) {
@@ -48,6 +68,9 @@ public class VetDetailFragment extends Fragment implements View.OnClickListener{
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         mVet = Parcels.unwrap(getArguments().getParcelable("vet"));
+
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        mPetPushId = mSharedPreferences.getString(Constants.PREFERENCES_PETPUSHID_KEY, null);
     }
 
     @Override
@@ -73,6 +96,7 @@ public class VetDetailFragment extends Fragment implements View.OnClickListener{
         mWebsiteLabel.setOnClickListener(this);
         mPhoneLabel.setOnClickListener(this);
         mAddressLabel.setOnClickListener(this);
+        mSaveVetButton.setOnClickListener(this);
 
         mNameLabel.setText(mVet.getName());
         mRatingLabel.setText(Double.toString(mVet.getRating()) + "/5");
@@ -98,6 +122,43 @@ public class VetDetailFragment extends Fragment implements View.OnClickListener{
             Intent mapIntent = new Intent(Intent.ACTION_VIEW,
                     Uri.parse("geo:" + mVet.getLatitude() + "," + mVet.getLongitude() + "?q=(" + mVet.getName() + ")"));
             startActivity(mapIntent);
+        }
+        if (v == mSaveVetButton) {
+            final ArrayList<Pet> pets = new ArrayList<>();
+
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            final String uid = user.getUid();
+            final DatabaseReference petRef = FirebaseDatabase
+                    .getInstance()
+                    .getReference(Constants.FIREBASE_CHILD_PETS)
+                    .child(uid);
+            petRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                        pets.add(snapshot.getValue(Pet.class));
+                    }
+                    for (Pet pet : pets) {
+                        if(pet.getPushId().equals(mPetPushId)){
+                            currentPet = pet;
+                        }
+                    }
+                    currentPet.setVet(mVet);
+                    DatabaseReference updateRef = FirebaseDatabase
+                            .getInstance()
+                            .getReference(Constants.FIREBASE_CHILD_PETS)
+                            .child(uid)
+                            .child(mPetPushId);
+                    updateRef.setValue(currentPet);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+
         }
     }
 

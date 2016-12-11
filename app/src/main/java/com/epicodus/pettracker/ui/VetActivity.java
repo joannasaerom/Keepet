@@ -43,6 +43,7 @@ public class VetActivity extends AppCompatActivity {
     private SharedPreferences.Editor mEditor;
     private VetListAdapter mAdapter;
     private String mRecentAddress;
+//    private String mPetPushId;
 
     public static final String TAG = VetActivity.class.getSimpleName();
 
@@ -58,6 +59,8 @@ public class VetActivity extends AppCompatActivity {
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
+//        mPetPushId = mSharedPreferences.getString(Constants.PREFERENCES_PETPUSHID_KEY, null);
+//        Log.d("VetActivity", mPetPushId);
 
         if (mRecentAddress != null){
             getVets(mRecentAddress);

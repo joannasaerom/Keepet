@@ -1,9 +1,9 @@
 package com.epicodus.pettracker.ui;
 
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -87,6 +87,11 @@ public class WeightActivity extends AppCompatActivity implements View.OnClickLis
                 graphView.getViewport().setMaxX(weights.get(lastIndex).getWeightDate().getTime());
                 graphView.getViewport().setXAxisBoundsManual(true);
                 graphView.getGridLabelRenderer().setHumanRounding(false);
+
+                series.setDrawDataPoints(true);
+                series.setDataPointsRadius(10);
+                series.setThickness(8);
+                series.setColor(Color.WHITE);
 
             }
             @Override

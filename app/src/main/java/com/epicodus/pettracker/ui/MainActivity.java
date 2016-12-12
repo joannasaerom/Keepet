@@ -69,12 +69,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
 
-//        Typeface rampung = Typeface.createFromAsset(getAssets(), "fonts/Rampung.ttf");
-//        mPetName.setTypeface(rampung);
-//        mBirthDate.setTypeface(rampung);
-//        mWeightButton.setTypeface(rampung);
-//        mMedicationButton.setTypeface(rampung);
-//        mVetButton.setTypeface(rampung);
+        Typeface rampung = Typeface.createFromAsset(getAssets(), "fonts/theboldfont.ttf");
+        mPetName.setTypeface(rampung);
+        mBirthDate.setTypeface(rampung);
+        mWeightButton.setTypeface(rampung);
+        mMedicationButton.setTypeface(rampung);
+        mVetButton.setTypeface(rampung);
 
         mWeightButton.setOnClickListener(this);
         mMedicationButton.setOnClickListener(this);

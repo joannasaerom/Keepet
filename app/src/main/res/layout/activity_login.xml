@@ -54,6 +54,7 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:text="Log in"
+            android:textSize="25dp"
             android:background="@color/colorAccent"
             android:layout_marginTop="15dp"
             android:textColor="@color/colorText" />
@@ -71,14 +72,15 @@
 
     </LinearLayout>
 
+
     <TextView
+        android:text="Pet Tracker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
-        android:textColor="@color/colorText"
-        android:textSize="30dp"
-        android:textStyle="bold"
-        android:layout_above="@+id/linearLayout"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentTop="true"
+        android:textSize="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:id="@+id/appName" />
 
 </RelativeLayout>

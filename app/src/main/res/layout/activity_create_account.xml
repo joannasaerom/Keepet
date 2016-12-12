@@ -82,6 +82,7 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:text="Sign up"
+            android:textSize="25dp"
             android:background="@color/colorAccent"
             android:layout_marginTop="15dp"
             android:textColor="@color/colorBackground" />
@@ -103,6 +104,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Create Account"
+        android:id="@+id/createAccountText"
         android:textColor="@color/colorText"
         android:textSize="30dp"
         android:textStyle="bold"

@@ -2,6 +2,7 @@ package com.epicodus.pettracker.ui;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Bind(R.id.passwordEditText) EditText mPasswordEditText;
     @Bind(R.id.passwordLoginButton) Button mPasswordLoginButton;
     @Bind(R.id.registerTextView) TextView mRegisterTextView;
+    @Bind(R.id.appName) TextView mAppName;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -40,6 +42,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
 
         ButterKnife.bind(this);
+
+        Typeface rampung = Typeface.createFromAsset(getAssets(), "fonts/theboldfont.ttf");
+        mEmailEditText.setTypeface(rampung);
+        mPasswordEditText.setTypeface(rampung);
+        mPasswordLoginButton.setTypeface(rampung);
+        mRegisterTextView.setTypeface(rampung);
+        mAppName.setTypeface(rampung);
 
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {

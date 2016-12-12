@@ -84,8 +84,8 @@ public class WeightActivity extends AppCompatActivity implements View.OnClickLis
                 graphView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(WeightActivity.this));
                 long today = System.currentTimeMillis();
                 graphView.getGridLabelRenderer().setNumHorizontalLabels(2);
-                graphView.getViewport().setMinX(weights.get(0).getWeightDate().getTime());
-                graphView.getViewport().setMaxX(today);
+//                graphView.getViewport().setMinX(weights.get(0).getWeightDate().getTime());
+//                graphView.getViewport().setMaxX(today);
                 graphView.getViewport().setXAxisBoundsManual(true);
                 graphView.getGridLabelRenderer().setHumanRounding(false);
 

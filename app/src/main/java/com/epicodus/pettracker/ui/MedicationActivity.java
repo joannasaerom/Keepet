@@ -46,7 +46,7 @@ public class MedicationActivity extends AppCompatActivity implements View.OnClic
 
         ButterKnife.bind(this);
 
-        Typeface rampung = Typeface.createFromAsset(getAssets(), "fonts/Rampung.ttf");
+        Typeface rampung = Typeface.createFromAsset(getAssets(), "fonts/theboldfont.ttf");
         mPageTitle.setTypeface(rampung);
 
         mPet = Parcels.unwrap(getIntent().getParcelableExtra("pet"));

@@ -33,11 +33,11 @@
         android:id="@+id/weight" />
 
     <Button
-        android:text="Addp"
+        android:text="Add"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/button"
-        android:textSize="40dp"
+        android:textSize="30dp"
         android:background="@color/colorBackground"
         android:textColor="@color/colorText"
         android:layout_alignParentBottom="true"

@@ -1,6 +1,7 @@
 package com.epicodus.pettracker.ui;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,6 +37,12 @@ public class NewMedicationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_medication);
 
         ButterKnife.bind(this);
+
+        Typeface rampung = Typeface.createFromAsset(getAssets(), "fonts/theboldfont.ttf");
+        mMedicationName.setTypeface(rampung);
+        mMedicationDetail.setTypeface(rampung);
+        mReminder.setTypeface(rampung);
+        mAddMedicine.setTypeface(rampung);
 
 
         mPet = Parcels.unwrap(getIntent().getParcelableExtra("pet"));

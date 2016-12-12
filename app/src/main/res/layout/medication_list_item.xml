@@ -5,13 +5,10 @@
 
     <TextView
         android:text="Medication Name"
+        android:layout_marginLeft="15dp"
+        android:textSize="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/medicationName" />
 
-    <TextView
-        android:text="Medication Details"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/medicationDetails" />
 </LinearLayout>

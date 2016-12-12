@@ -39,10 +39,8 @@ public class FirebaseMedicationViewHolder extends RecyclerView.ViewHolder implem
     public void bindMedication(Medication medication){
         mMedication = medication;
         TextView medicationNameTextView = (TextView) mView.findViewById(R.id.medicationName);
-        TextView medicationDetailTextView = (TextView) mView.findViewById(R.id.medicationDetails);
 
         medicationNameTextView.setText(medication.getName());
-        medicationDetailTextView.setText(medication.getDetail());
     }
 
     @Override

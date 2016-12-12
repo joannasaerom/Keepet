@@ -109,7 +109,10 @@
 
             <Button
                 android:text="Save Vet Info"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:background="@color/colorBackground"
+                android:textColor="@color/colorText"
+                android:textSize="40dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"

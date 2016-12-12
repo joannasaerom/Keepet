@@ -54,8 +54,8 @@ public class VetActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-
-        Typeface rampung = Typeface.createFromAsset(getAssets(), "fonts/Rampung.ttf");
+//
+//        Typeface rampung = Typeface.createFromAsset(getAssets(), "fonts/Rampung.ttf");
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);

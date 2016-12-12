@@ -52,22 +52,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mPet = Parcels.unwrap(getIntent().getParcelableExtra("pet"));
 
         if (mPet != null){
-            DateFormat df = new SimpleDateFormat("mm/dd/yyyy");
+            DateFormat df = new SimpleDateFormat("MMM dd");
             Date birthDate = mPet.getBirthdate();
             String stringDate = df.format(birthDate);
+            String genderShortened;
+
+            if (mPet.getGender().equals("Female")){
+                genderShortened = "F";
+            } else {
+                genderShortened = "M";
+            }
 
 
-            mPetName.setText(mPet.getName() + " | " + mPet.getGender());
-            mBirthDate.setText(stringDate);
+            mPetName.setText(mPet.getName() + " | " + genderShortened);
+            mBirthDate.setText("Birthdate: " + stringDate);
         }
 
 
-        Typeface rampung = Typeface.createFromAsset(getAssets(), "fonts/Rampung.ttf");
-        mPetName.setTypeface(rampung);
-        mBirthDate.setTypeface(rampung);
-        mWeightButton.setTypeface(rampung);
-        mMedicationButton.setTypeface(rampung);
-        mVetButton.setTypeface(rampung);
+//        Typeface rampung = Typeface.createFromAsset(getAssets(), "fonts/Rampung.ttf");
+//        mPetName.setTypeface(rampung);
+//        mBirthDate.setTypeface(rampung);
+//        mWeightButton.setTypeface(rampung);
+//        mMedicationButton.setTypeface(rampung);
+//        mVetButton.setTypeface(rampung);
 
         mWeightButton.setOnClickListener(this);
         mMedicationButton.setOnClickListener(this);

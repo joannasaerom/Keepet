@@ -76,6 +76,7 @@ public class FirebasePetViewHolder extends RecyclerView.ViewHolder implements Vi
                 intent.putExtra("pet", Parcels.wrap(mPet));
                 addToSharedPreferences(mPet.getPushId());
                 mContext.startActivity(intent);
+
             }
 
             @Override

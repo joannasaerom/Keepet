@@ -53,10 +53,10 @@ public class WeightActivity extends AppCompatActivity implements View.OnClickLis
         final ArrayList<Weight> weights = new ArrayList<>();
         mPet = Parcels.unwrap(getIntent().getParcelableExtra("pet"));
 
-        Typeface rampung = Typeface.createFromAsset(getAssets(), "fonts/Rampung.ttf");
-        mTodayDate.setTypeface(rampung);
-        mWeight.setTypeface(rampung);
-        mWeightButton.setTypeface(rampung);
+//        Typeface rampung = Typeface.createFromAsset(getAssets(), "fonts/Rampung.ttf");
+//        mTodayDate.setTypeface(rampung);
+//        mWeight.setTypeface(rampung);
+//        mWeightButton.setTypeface(rampung);
 
         graphView = (GraphView) findViewById(R.id.graph);
         series = new LineGraphSeries<DataPoint>();

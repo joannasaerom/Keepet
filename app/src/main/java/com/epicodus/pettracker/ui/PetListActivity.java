@@ -39,8 +39,8 @@ public class PetListActivity extends AppCompatActivity implements View.OnClickLi
 
         ButterKnife.bind(this);
 
-        Typeface rampung = Typeface.createFromAsset(getAssets(), "fonts/Rampung.ttf");
-        mPageTitle.setTypeface(rampung);
+//        Typeface rampung = Typeface.createFromAsset(getAssets(), "fonts/Rampung.ttf");
+//        mPageTitle.setTypeface(rampung);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = user.getUid();

@@ -83,12 +83,12 @@ public class VetDetailFragment extends Fragment implements View.OnClickListener{
         View view = inflater.inflate(R.layout.fragment_vet_detail, container, false);
         ButterKnife.bind(this, view);
 
-        Typeface rampung = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Rampung.ttf");
-        mNameLabel.setTypeface(rampung);
-        mRatingLabel.setTypeface(rampung);
-        mWebsiteLabel.setTypeface(rampung);
-        mPhoneLabel.setTypeface(rampung);
-        mAddressLabel.setTypeface(rampung);
+//        Typeface rampung = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Rampung.ttf");
+//        mNameLabel.setTypeface(rampung);
+//        mRatingLabel.setTypeface(rampung);
+//        mWebsiteLabel.setTypeface(rampung);
+//        mPhoneLabel.setTypeface(rampung);
+//        mAddressLabel.setTypeface(rampung);
 
         Picasso.with(view.getContext())
                 .load(mVet.getImageUrl())

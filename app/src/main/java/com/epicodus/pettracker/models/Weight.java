@@ -8,19 +8,19 @@ import java.util.Date;
 
 public class Weight {
     Date weightDate;
-    int weight;
+    float weight;
     String petId;
     String pushId;
 
     public Weight() {}
 
-    public Weight(Date weightDate, int weight, String petId){
+    public Weight(Date weightDate, float weight, String petId){
         this.weightDate = weightDate;
         this.weight = weight;
         this.petId = petId;
     }
 
-    public int getWeight() {
+    public float getWeight() {
         return weight;
     }
 

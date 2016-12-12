@@ -8,10 +8,12 @@
     tools:context="com.epicodus.pettracker.ui.WeightActivity">
 
     <com.jjoe64.graphview.GraphView
-        android:layout_width="match_parent"
-        android:layout_height="200dip"
+        android:layout_width="wrap_content"
+        android:layout_height="350dp"
         android:id="@+id/graph"
-        android:layout_marginTop="71dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="60dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
@@ -22,33 +24,35 @@
         android:ems="10"
         android:textColorHint="@color/colorText"
         android:hint="Weight"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:layout_above="@+id/button"
         android:textColor="@color/colorText"
-        android:layout_alignBottom="@+id/todayDate"
-        android:layout_toEndOf="@+id/todayDate"
         android:id="@+id/weight" />
 
     <Button
-        android:text="Add Weight"
+        android:text="Add"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/button"
+        android:textSize="40dp"
         android:background="@color/colorBackground"
         android:textColor="@color/colorText"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="70dp" />
+        android:layout_centerHorizontal="true" />
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="date"
         android:ems="10"
-        android:hint="Today's Date"
+        android:textSize="30dp"
+        android:textAlignment="center"
         android:textColor="@color/colorText"
-        android:textColorHint="@color/colorText"
         android:id="@+id/todayDate"
-        android:layout_above="@+id/button"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="39dp" />
+        android:layout_marginBottom="10dp"
+        android:layout_above="@+id/weight"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

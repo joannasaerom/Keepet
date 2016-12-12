@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.epicodus.pettracker.Constants;
@@ -36,7 +37,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class WeightActivity extends AppCompatActivity implements View.OnClickListener{
-    @Bind(R.id.todayDate) EditText mTodayDate;
+    @Bind(R.id.todayDate) TextView mTodayDate;
     @Bind(R.id.weight) EditText mWeight;
     @Bind(R.id.button) Button mWeightButton;
 
@@ -53,10 +54,10 @@ public class WeightActivity extends AppCompatActivity implements View.OnClickLis
         final ArrayList<Weight> weights = new ArrayList<>();
         mPet = Parcels.unwrap(getIntent().getParcelableExtra("pet"));
 
-//        Typeface rampung = Typeface.createFromAsset(getAssets(), "fonts/Rampung.ttf");
-//        mTodayDate.setTypeface(rampung);
-//        mWeight.setTypeface(rampung);
-//        mWeightButton.setTypeface(rampung);
+        Typeface rampung = Typeface.createFromAsset(getAssets(), "fonts/SFOldRepublic-Bold.ttf");
+        mTodayDate.setTypeface(rampung);
+        mWeight.setTypeface(rampung);
+        mWeightButton.setTypeface(rampung);
 
         graphView = (GraphView) findViewById(R.id.graph);
         series = new LineGraphSeries<DataPoint>();
@@ -74,17 +75,17 @@ public class WeightActivity extends AppCompatActivity implements View.OnClickLis
                 }
                 for(Weight weight : weights){
                     long unixTime = weight.getWeightDate().getTime();
-                    int petWeight = weight.getWeight();
+                    float petWeight = weight.getWeight();
 
                     series.appendData(new DataPoint(unixTime, petWeight), false, 100);
                 }
 
                 graphView.addSeries(series);
                 graphView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(WeightActivity.this));
-                int lastIndex = weights.size() -1;
+                long today = System.currentTimeMillis();
                 graphView.getGridLabelRenderer().setNumHorizontalLabels(2);
                 graphView.getViewport().setMinX(weights.get(0).getWeightDate().getTime());
-                graphView.getViewport().setMaxX(weights.get(lastIndex).getWeightDate().getTime());
+                graphView.getViewport().setMaxX(today);
                 graphView.getViewport().setXAxisBoundsManual(true);
                 graphView.getGridLabelRenderer().setHumanRounding(false);
 
@@ -99,31 +100,23 @@ public class WeightActivity extends AppCompatActivity implements View.OnClickLis
 
             }
         });
+        Date today = new Date();
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 
+        mTodayDate.setText("Today: " + df.format(today));
         mWeightButton.setOnClickListener(this);
 
     }
     @Override
     public void onClick(View v){
         if (v == mWeightButton) {
-            String todayDateText = mTodayDate.getText().toString();
             String weight = mWeight.getText().toString();
 
-            if (todayDateText.equals("")) {
-                mTodayDate.setError("Please enter a date");
-                return;
-            }
             if (weight.equals("")) {
                 mWeight.setError("Please enter a weight");
             }
-            int weightInt = Integer.parseInt(weight);
-            DateFormat df = new SimpleDateFormat("mm/dd/yyyy");
+            float weightInt = Float.parseFloat(weight);
             Date todayDate = new Date();
-            try {
-                todayDate = df.parse(todayDateText);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
             String petId = mPet.getPushId();
             Weight newWeight = new Weight(todayDate, weightInt, petId);
 

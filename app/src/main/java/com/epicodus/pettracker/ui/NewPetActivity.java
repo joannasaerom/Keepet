@@ -1,6 +1,7 @@
 package com.epicodus.pettracker.ui;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -32,7 +34,9 @@ public class NewPetActivity extends AppCompatActivity implements View.OnClickLis
     @Bind(R.id.gender) EditText mGender;
     @Bind(R.id.addPet) Button mAddPet;
     @Bind(R.id.cameraIcon) ImageView mCameraIcon;
+    @Bind(R.id.circularImageView) CircularImageView mCircularImage;
 
+    private static final int REQUEST_IMAGE_CAPTURE = 111;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +103,16 @@ public class NewPetActivity extends AppCompatActivity implements View.OnClickLis
             onLaunchCamera();
         }
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == NewPetActivity.RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            mCircularImage.setImageBitmap(imageBitmap);
+//            encodeBitmapAndSaveToFirebase(imageBitmap);
+        }
     }
     public void onLaunchCamera(){
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

@@ -2,12 +2,15 @@ package com.epicodus.pettracker.ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,9 +26,11 @@ import com.epicodus.pettracker.models.Pet;
 import com.epicodus.pettracker.models.Vet;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
+import com.mikhaellopez.circularimageview.CircularImageView;
 
 import org.parceler.Parcels;
 
+import java.io.IOException;
 import java.util.Date;
 
 import butterknife.Bind;
@@ -38,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Bind(R.id.petName) TextView mPetName;
     @Bind(R.id.birthDate) TextView mBirthDate;
     @Bind(R.id.vetButton) Button mVetButton;
+    @Bind(R.id.circularImageView) CircularImageView mCircularImageView;
 
     private Pet mPet;
 
@@ -61,6 +67,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 genderShortened = "F";
             } else {
                 genderShortened = "M";
+            }
+
+            String imageUrl = mPet.getImageUrl();
+
+            if (!imageUrl.equals("")) {
+                try {
+                    Bitmap imageBitmap = decodeFromFirebase64(mPet.getImageUrl());
+                    mCircularImageView.setImageBitmap(imageBitmap);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
 
 
@@ -139,6 +156,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
+    }
+
+    public static Bitmap decodeFromFirebase64(String image) throws IOException {
+        byte[] decodedByteArray = android.util.Base64.decode(image, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.length);
     }
 
 }

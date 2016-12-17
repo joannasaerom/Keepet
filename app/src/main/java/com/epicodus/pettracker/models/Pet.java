@@ -16,6 +16,7 @@ public class Pet {
     String gender;
     String userId;
     String pushId;
+    String imageUrl;
     Vet vet;
 
     public Pet(){}
@@ -76,4 +77,11 @@ public class Pet {
         this.vet = vet;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 }

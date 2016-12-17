@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
 
-            mPetName.setText(mPet.getName() + " | " + genderShortened);
+            mPetName.setText(mPet.getName() + " / " + genderShortened);
             mBirthDate.setText("Birthdate: " + stringDate);
         }
 

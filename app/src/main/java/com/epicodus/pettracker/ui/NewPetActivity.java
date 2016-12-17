@@ -1,11 +1,13 @@
 package com.epicodus.pettracker.ui;
 
 import android.content.Intent;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.epicodus.pettracker.Constants;
@@ -24,11 +26,12 @@ import java.util.Date;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class NewPetActivity extends AppCompatActivity {
+public class NewPetActivity extends AppCompatActivity implements View.OnClickListener {
     @Bind(R.id.petName) EditText mPetName;
     @Bind(R.id.birthDate) EditText mBirthdate;
     @Bind(R.id.gender) EditText mGender;
     @Bind(R.id.addPet) Button mAddPet;
+    @Bind(R.id.cameraIcon) ImageView mCameraIcon;
 
 
     @Override
@@ -38,60 +41,70 @@ public class NewPetActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        mAddPet.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                String name = mPetName.getText().toString();
-                String birthDateText = mBirthdate.getText().toString();
-                String gender = mGender.getText().toString();
+        mAddPet.setOnClickListener(this);
+        mCameraIcon.setOnClickListener(this);
 
-                if (name.equals("")){
-                    mPetName.setError("Please enter a name");
-                    return;
-                }
-                if (birthDateText.equals("")){
-                    mBirthdate.setError("Please enter your pet's date of birth");
-                    return;
-                }
-                if (gender.equals("")){
-                    mGender.setError("Please specify your pet's gender");
-                    return;
-                }
+    }
 
-                DateFormat df = new SimpleDateFormat("mm/dd/yyyy");
-                Date birthDate = new Date();
-                try {
-                    birthDate = df.parse(birthDateText);
-                } catch (ParseException e){
-                    e.printStackTrace();
-                }
+    @Override
+    public void onClick(View v){
+        if (v == mAddPet){
+            String name = mPetName.getText().toString();
+            String birthDateText = mBirthdate.getText().toString();
+            String gender = mGender.getText().toString();
 
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                String uid = user.getUid();
-
-                Pet newPet = new Pet(name, birthDate, gender, uid);
-
-                DatabaseReference petRef = FirebaseDatabase
-                        .getInstance()
-                        .getReference(Constants.FIREBASE_CHILD_PETS)
-                        .child(uid);
-
-                DatabaseReference pushRef = petRef.push();
-                String pushId = pushRef.getKey();
-                newPet.setPushId(pushId);
-                pushRef.setValue(newPet);
-
-                Toast.makeText(NewPetActivity.this, "Saved", Toast.LENGTH_SHORT).show();
-
-
-                Intent intent = new Intent(NewPetActivity.this, PetListActivity.class);
-                startActivity(intent);
+            if (name.equals("")){
+                mPetName.setError("Please enter a name");
+                return;
             }
-        });
+            if (birthDateText.equals("")){
+                mBirthdate.setError("Please enter your pet's date of birth");
+                return;
+            }
+            if (gender.equals("")){
+                mGender.setError("Please specify your pet's gender");
+                return;
+            }
+
+            DateFormat df = new SimpleDateFormat("mm/dd/yyyy");
+            Date birthDate = new Date();
+            try {
+                birthDate = df.parse(birthDateText);
+            } catch (ParseException e){
+                e.printStackTrace();
+            }
+
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            String uid = user.getUid();
+
+            Pet newPet = new Pet(name, birthDate, gender, uid);
+
+            DatabaseReference petRef = FirebaseDatabase
+                    .getInstance()
+                    .getReference(Constants.FIREBASE_CHILD_PETS)
+                    .child(uid);
+
+            DatabaseReference pushRef = petRef.push();
+            String pushId = pushRef.getKey();
+            newPet.setPushId(pushId);
+            pushRef.setValue(newPet);
+
+            Toast.makeText(NewPetActivity.this, "Saved", Toast.LENGTH_SHORT).show();
 
 
+            Intent intent = new Intent(NewPetActivity.this, PetListActivity.class);
+            startActivity(intent);
+        }
+        if (v == mCameraIcon){
+            onLaunchCamera();
+        }
 
-
+    }
+    public void onLaunchCamera(){
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null){
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
     }
 
 }

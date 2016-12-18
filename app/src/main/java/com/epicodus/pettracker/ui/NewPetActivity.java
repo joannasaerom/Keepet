@@ -10,6 +10,7 @@ import android.util.Base64;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -35,7 +36,7 @@ import butterknife.ButterKnife;
 
 public class NewPetActivity extends AppCompatActivity implements View.OnClickListener {
     @Bind(R.id.petName) EditText mPetName;
-    @Bind(R.id.birthDate) EditText mBirthdate;
+    @Bind(R.id.birthDate) DatePicker mBirthdate;
     @Bind(R.id.gender) Spinner mGender;
     @Bind(R.id.addPet) Button mAddPet;
     @Bind(R.id.cameraIcon) ImageView mCameraIcon;
@@ -67,26 +68,20 @@ public class NewPetActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v){
         if (v == mAddPet){
             String name = mPetName.getText().toString();
-            String birthDateText = mBirthdate.getText().toString();
             String gender = mGender.getSelectedItem().toString();
+
+            int day = mBirthdate.getDayOfMonth();
+            int month = mBirthdate.getMonth();
+            int year = mBirthdate.getYear();
 
             if (name.equals("")){
                 mPetName.setError("Please enter a name");
                 return;
             }
-            if (birthDateText.equals("")){
-                mBirthdate.setError("Please enter your pet's date of birth");
-                return;
-            }
 
+            SimpleDateFormat df = new SimpleDateFormat("MM-dd-yyyy");
+            Date birthDate = new Date(year, month, day);
 
-            DateFormat df = new SimpleDateFormat("mm/dd/yyyy");
-            Date birthDate = new Date();
-            try {
-                birthDate = df.parse(birthDateText);
-            } catch (ParseException e){
-                e.printStackTrace();
-            }
 
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             String uid = user.getUid();

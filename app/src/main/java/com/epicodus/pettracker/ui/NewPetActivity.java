@@ -1,15 +1,18 @@
 package com.epicodus.pettracker.ui;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.epicodus.pettracker.Constants;
@@ -33,7 +36,7 @@ import butterknife.ButterKnife;
 public class NewPetActivity extends AppCompatActivity implements View.OnClickListener {
     @Bind(R.id.petName) EditText mPetName;
     @Bind(R.id.birthDate) EditText mBirthdate;
-    @Bind(R.id.gender) EditText mGender;
+    @Bind(R.id.gender) Spinner mGender;
     @Bind(R.id.addPet) Button mAddPet;
     @Bind(R.id.cameraIcon) ImageView mCameraIcon;
     @Bind(R.id.circularImageView) CircularImageView mCircularImage;
@@ -41,6 +44,7 @@ public class NewPetActivity extends AppCompatActivity implements View.OnClickLis
     private static final int REQUEST_IMAGE_CAPTURE = 111;
     private Bitmap imageBitmap;
     private String imageUrl;
+    private String[] gender;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +56,11 @@ public class NewPetActivity extends AppCompatActivity implements View.OnClickLis
         mAddPet.setOnClickListener(this);
         mCameraIcon.setOnClickListener(this);
 
+        Resources res = getResources();
+        gender = res.getStringArray(R.array.gender);
+        ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(NewPetActivity.this, android.R.layout.simple_spinner_item, gender);
+        mGender.setAdapter(mAdapter);
+
     }
 
     @Override
@@ -59,7 +68,7 @@ public class NewPetActivity extends AppCompatActivity implements View.OnClickLis
         if (v == mAddPet){
             String name = mPetName.getText().toString();
             String birthDateText = mBirthdate.getText().toString();
-            String gender = mGender.getText().toString();
+            String gender = mGender.getSelectedItem().toString();
 
             if (name.equals("")){
                 mPetName.setError("Please enter a name");
@@ -69,10 +78,7 @@ public class NewPetActivity extends AppCompatActivity implements View.OnClickLis
                 mBirthdate.setError("Please enter your pet's date of birth");
                 return;
             }
-            if (gender.equals("")){
-                mGender.setError("Please specify your pet's gender");
-                return;
-            }
+
 
             DateFormat df = new SimpleDateFormat("mm/dd/yyyy");
             Date birthDate = new Date();

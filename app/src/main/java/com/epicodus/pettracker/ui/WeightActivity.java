@@ -43,13 +43,11 @@ public class WeightActivity extends AppCompatActivity implements View.OnClickLis
     @Bind(R.id.todayDate) TextView mTodayDate;
     @Bind(R.id.weight) EditText mWeight;
     @Bind(R.id.button) Button mWeightButton;
-//    @Bind(R.id.spinner) Spinner mWeightTypeSpinner;
     @Bind(R.id.lbs) TextView mLbs;
 
     private Pet mPet;
     private GraphView graphView;
     private LineGraphSeries<DataPoint> series;
-//    private String[] weightType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,11 +110,6 @@ public class WeightActivity extends AppCompatActivity implements View.OnClickLis
 
         mTodayDate.setText("Today: " + df.format(today));
         mWeightButton.setOnClickListener(this);
-
-//        Resources res = getResources();
-//        weightType = res.getStringArray(R.array.weight);
-//        ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(WeightActivity.this, android.R.layout.simple_spinner_item, weightType);
-//        mWeightTypeSpinner.setAdapter(mAdapter);
 
     }
     @Override

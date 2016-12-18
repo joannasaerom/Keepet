@@ -38,19 +38,16 @@
         android:hint="Name"
         android:ems="10"
         android:id="@+id/petName"
-        android:layout_above="@+id/gender"
+        android:layout_below="@+id/cameraIcon"
         android:layout_centerHorizontal="true" />
 
-    <EditText
+    <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="Male or Female"
-        android:textColorHint="@color/colorText"
-        android:ems="10"
         android:id="@+id/gender"
+        android:layout_below="@+id/petName"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/birthDate" />
+       />
 
     <EditText
         android:layout_width="wrap_content"
@@ -60,10 +57,8 @@
         android:hint="Birthdate"
         android:ems="10"
         android:id="@+id/birthDate"
-        android:layout_marginBottom="40dp"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/addPet"
-        android:layout_alignStart="@+id/gender" />
+        android:layout_below="@+id/gender"/>
 
     <Button
         android:text="Add Pet"

@@ -2,8 +2,8 @@
     <string name="app_name">Keepet</string>
     <string name="title_activity_medication">MedicationActivity</string>
 
-    <string-array name="weight">
-        <item>lb</item>
-        <item>kg</item>
+    <string-array name="gender">
+        <item>Female</item>
+        <item>Male</item>
     </string-array>
 </resources>

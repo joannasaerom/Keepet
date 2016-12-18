@@ -44,12 +44,6 @@
         android:textColor="@color/colorText"
         android:id="@+id/weight" />
 
-    <!--<Spinner-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/spinner"-->
-        <!--android:background="@color/colorBackground"-->
-        <!--android:layout_weight="0.5"/>-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -60,6 +54,7 @@
             android:textSize="30sp"/>
 
     </LinearLayout>
+
     <Button
         android:text="Add"
         android:layout_width="match_parent"

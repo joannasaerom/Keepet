@@ -1,6 +1,7 @@
 package com.epicodus.pettracker.ui;
 
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import com.epicodus.pettracker.R;
 import com.epicodus.pettracker.adapters.VetListAdapter;
 import com.epicodus.pettracker.models.Vet;
 import com.epicodus.pettracker.services.YelpService;
+import com.epicodus.pettracker.utils.OnVetSelectedListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -45,6 +47,7 @@ public class VetFragment extends Fragment {
     private SharedPreferences.Editor mEditor;
     private VetListAdapter mAdapter;
     private String mRecentAddress;
+    private OnVetSelectedListener mOnVetSelectedListener;
 
     public VetFragment() {
 
@@ -58,6 +61,15 @@ public class VetFragment extends Fragment {
 
     }
 
+    @Override
+    public void onAttach(Context context){
+        super.onAttach(context);
+        try {
+            mOnVetSelectedListener = (OnVetSelectedListener) context;
+        } catch (ClassCastException e){
+            throw new ClassCastException(context.toString() + e.getMessage());
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -131,7 +143,7 @@ public class VetFragment extends Fragment {
                 getActivity().runOnUiThread(new Runnable(){
                     @Override
                     public void run(){
-                        mAdapter = new VetListAdapter(getActivity().getApplicationContext(), mVets);
+                        mAdapter = new VetListAdapter(getActivity().getApplicationContext(), mVets, mOnVetSelectedListener);
                         mVetList.setAdapter(mAdapter);
                         RecyclerView.LayoutManager layoutManager =
                                 new LinearLayoutManager(getActivity());

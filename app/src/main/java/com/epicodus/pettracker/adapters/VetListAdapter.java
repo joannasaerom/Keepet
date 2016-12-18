@@ -17,6 +17,7 @@ import com.epicodus.pettracker.R;
 import com.epicodus.pettracker.models.Vet;
 import com.epicodus.pettracker.ui.VetDetailActivity;
 import com.epicodus.pettracker.ui.VetDetailFragment;
+import com.epicodus.pettracker.utils.OnVetSelectedListener;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
@@ -36,16 +37,18 @@ public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.VetViewH
 
     private ArrayList<Vet> mVets = new ArrayList<>();
     private Context mContext;
+    private OnVetSelectedListener mOnVetSelectedListener;
 
-    public VetListAdapter(Context context, ArrayList<Vet> vets){
+    public VetListAdapter(Context context, ArrayList<Vet> vets, OnVetSelectedListener vetSelectedListener){
         mContext = context;
         mVets = vets;
+        mOnVetSelectedListener = vetSelectedListener;
     }
 
     @Override
     public VetListAdapter.VetViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.vet_list_item, parent, false);
-        VetViewHolder viewHolder = new VetViewHolder(view);
+        VetViewHolder viewHolder = new VetViewHolder(view, mVets, mOnVetSelectedListener);
         return viewHolder;
     }
 
@@ -66,11 +69,15 @@ public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.VetViewH
 
         private int mOrientation;
         private Context mContext;
+        private ArrayList<Vet> mVets = new ArrayList<>();
+        private OnVetSelectedListener mVetSelectedListener;
 
-        public VetViewHolder(View itemView){
+        public VetViewHolder(View itemView, ArrayList<Vet> vets, OnVetSelectedListener vetSelectedListener){
             super(itemView);
             ButterKnife.bind(this, itemView);
             mContext = itemView.getContext();
+            mVets = vets;
+            mVetSelectedListener = vetSelectedListener;
             mOrientation = itemView.getResources().getConfiguration().orientation;
 
             if (mOrientation == Configuration.ORIENTATION_LANDSCAPE){
@@ -83,6 +90,7 @@ public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.VetViewH
         @Override
         public void onClick(View v){
             int itemPosition = getLayoutPosition();
+            mVetSelectedListener.onVetSelected(itemPosition, mVets);
             if (mOrientation == Configuration.ORIENTATION_LANDSCAPE){
                 createDetailFragment(itemPosition);
             } else{

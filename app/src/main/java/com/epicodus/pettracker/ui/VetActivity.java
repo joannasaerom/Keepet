@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.epicodus.pettracker.Constants;
 import com.epicodus.pettracker.R;
@@ -37,6 +38,7 @@ import okhttp3.Response;
 
 public class VetActivity extends AppCompatActivity {
     @Bind(R.id.vetList) RecyclerView mVetList;
+    @Bind(R.id.textView) TextView mText;
 
     public ArrayList<Vet> mVets = new ArrayList<>();
     private SharedPreferences mSharedPreferences;
@@ -54,8 +56,8 @@ public class VetActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-//
-//        Typeface rampung = Typeface.createFromAsset(getAssets(), "fonts/Rampung.ttf");
+        Typeface rampung = Typeface.createFromAsset(getAssets(), "fonts/theboldfont.ttf");
+        mText.setTypeface(rampung);
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
@@ -100,6 +102,7 @@ public class VetActivity extends AppCompatActivity {
     }
 
     private void getVets(String location){
+        mText.setVisibility(View.GONE);
 
         final YelpService yelpService = new YelpService();
         yelpService.findVets(location, new Callback(){

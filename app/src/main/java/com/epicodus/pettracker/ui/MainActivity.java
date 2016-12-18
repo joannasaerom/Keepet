@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             String imageUrl = mPet.getImageUrl();
 
-            if (!imageUrl.equals("")) {
+            if (imageUrl != null) {
                 try {
                     Bitmap imageBitmap = decodeFromFirebase64(mPet.getImageUrl());
                     mCircularImageView.setImageBitmap(imageBitmap);

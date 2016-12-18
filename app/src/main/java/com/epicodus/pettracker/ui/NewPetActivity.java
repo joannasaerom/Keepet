@@ -40,6 +40,7 @@ public class NewPetActivity extends AppCompatActivity implements View.OnClickLis
 
     private static final int REQUEST_IMAGE_CAPTURE = 111;
     private Bitmap imageBitmap;
+    private String imageUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,13 +82,11 @@ public class NewPetActivity extends AppCompatActivity implements View.OnClickLis
                 e.printStackTrace();
             }
 
-            String imageUrl = encodeBitmapAndSaveToFirebase(imageBitmap);
-
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             String uid = user.getUid();
 
             Pet newPet = new Pet(name, birthDate, gender, uid);
-            if (!imageUrl.equals("")){
+            if (imageUrl != null){
                 newPet.setImageUrl(imageUrl);
             }
 
@@ -119,6 +118,7 @@ public class NewPetActivity extends AppCompatActivity implements View.OnClickLis
             Bundle extras = data.getExtras();
             imageBitmap = (Bitmap) extras.get("data");
             mCircularImage.setImageBitmap(imageBitmap);
+            imageUrl = encodeBitmap(imageBitmap);
         }
     }
     public void onLaunchCamera(){
@@ -127,7 +127,7 @@ public class NewPetActivity extends AppCompatActivity implements View.OnClickLis
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         }
     }
-    public String encodeBitmapAndSaveToFirebase(Bitmap bitmap){
+    public String encodeBitmap(Bitmap bitmap){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
         String imageEncoded = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT);

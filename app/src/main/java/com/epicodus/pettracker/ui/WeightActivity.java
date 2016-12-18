@@ -1,12 +1,15 @@
 package com.epicodus.pettracker.ui;
 
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,10 +43,13 @@ public class WeightActivity extends AppCompatActivity implements View.OnClickLis
     @Bind(R.id.todayDate) TextView mTodayDate;
     @Bind(R.id.weight) EditText mWeight;
     @Bind(R.id.button) Button mWeightButton;
+//    @Bind(R.id.spinner) Spinner mWeightTypeSpinner;
+    @Bind(R.id.lbs) TextView mLbs;
 
     private Pet mPet;
     private GraphView graphView;
     private LineGraphSeries<DataPoint> series;
+//    private String[] weightType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +64,7 @@ public class WeightActivity extends AppCompatActivity implements View.OnClickLis
         mTodayDate.setTypeface(rampung);
         mWeight.setTypeface(rampung);
         mWeightButton.setTypeface(rampung);
+        mLbs.setTypeface(rampung);
 
         graphView = (GraphView) findViewById(R.id.graph);
         series = new LineGraphSeries<DataPoint>();
@@ -105,6 +112,11 @@ public class WeightActivity extends AppCompatActivity implements View.OnClickLis
 
         mTodayDate.setText("Today: " + df.format(today));
         mWeightButton.setOnClickListener(this);
+
+//        Resources res = getResources();
+//        weightType = res.getStringArray(R.array.weight);
+//        ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(WeightActivity.this, android.R.layout.simple_spinner_item, weightType);
+//        mWeightTypeSpinner.setAdapter(mAdapter);
 
     }
     @Override

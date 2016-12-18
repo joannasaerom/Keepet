@@ -13,25 +13,53 @@
         android:id="@+id/graph"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="60dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_marginTop="50dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_above="@+id/editTextLayout"
+        android:textSize="30sp"
+        android:textAlignment="center"
+        android:textColor="@color/colorText"
+        android:id="@+id/todayDate" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextLayout"
+        android:layout_above="@+id/button">
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
-        android:ems="10"
         android:textColorHint="@color/colorText"
         android:hint="Weight"
+        android:layout_weight="0.6"
+        android:layout_marginLeft="40dp"
         android:textAlignment="center"
-        android:textSize="30dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:layout_above="@+id/button"
+        android:textSize="30sp"
         android:textColor="@color/colorText"
         android:id="@+id/weight" />
 
+    <!--<Spinner-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/spinner"-->
+        <!--android:background="@color/colorBackground"-->
+        <!--android:layout_weight="0.5"/>-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="lbs"
+            android:id="@+id/lbs"
+            android:layout_weight="0.2"
+            android:textColor="@color/colorText"
+            android:textSize="30sp"/>
+
+    </LinearLayout>
     <Button
         android:text="Add"
         android:layout_width="match_parent"
@@ -40,19 +68,6 @@
         android:textSize="30dp"
         android:background="@color/colorBackground"
         android:textColor="@color/colorText"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:textSize="30dp"
-        android:textAlignment="center"
-        android:textColor="@color/colorText"
-        android:id="@+id/todayDate"
-        android:layout_marginBottom="10dp"
-        android:layout_above="@+id/weight"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

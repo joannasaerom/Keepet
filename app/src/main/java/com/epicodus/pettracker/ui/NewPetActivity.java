@@ -3,6 +3,7 @@ package com.epicodus.pettracker.ui;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -61,6 +62,10 @@ public class NewPetActivity extends AppCompatActivity implements View.OnClickLis
         gender = res.getStringArray(R.array.gender);
         ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(NewPetActivity.this, android.R.layout.simple_spinner_item, gender);
         mGender.setAdapter(mAdapter);
+
+        Typeface rampung = Typeface.createFromAsset(getAssets(), "fonts/theboldfont.ttf");
+        mPetName.setTypeface(rampung);
+        mAddPet.setTypeface(rampung);
 
     }
 

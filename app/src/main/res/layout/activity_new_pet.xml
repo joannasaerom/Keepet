@@ -46,6 +46,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/gender"
         android:layout_below="@+id/petName"
+        android:popupBackground="@color/colorBackground"
         android:layout_centerHorizontal="true"
        />
 

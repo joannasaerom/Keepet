@@ -11,7 +11,7 @@
     <com.mikhaellopez.circularimageview.CircularImageView
         android:layout_width="225dp"
         android:layout_height="225dp"
-        android:src="@drawable/dogicon1"
+        android:src="@drawable/dogicon2"
         app:civ_border_color="@color/colorBackground900"
         app:civ_border_width="10dp"
         app:civ_shadow="true"

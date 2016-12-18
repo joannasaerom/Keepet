@@ -37,15 +37,6 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class VetActivity extends AppCompatActivity {
-    @Bind(R.id.vetList) RecyclerView mVetList;
-    @Bind(R.id.textView) TextView mText;
-
-    public ArrayList<Vet> mVets = new ArrayList<>();
-    private SharedPreferences mSharedPreferences;
-    private SharedPreferences.Editor mEditor;
-    private VetListAdapter mAdapter;
-    private String mRecentAddress;
-
 
     public static final String TAG = VetActivity.class.getSimpleName();
 
@@ -54,87 +45,5 @@ public class VetActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vet);
 
-        ButterKnife.bind(this);
-
-        Typeface rampung = Typeface.createFromAsset(getAssets(), "fonts/theboldfont.ttf");
-        mText.setTypeface(rampung);
-
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
-
-
-        if (mRecentAddress != null){
-            getVets(mRecentAddress);
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu){
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_search, menu);
-        ButterKnife.bind(this);
-
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mEditor = mSharedPreferences.edit();
-
-        MenuItem menuItem = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query){
-                addToSharedPreferences(query);
-                getVets(query);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText){
-                return false;
-            }
-        });
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void getVets(String location){
-        mText.setVisibility(View.GONE);
-
-        final YelpService yelpService = new YelpService();
-        yelpService.findVets(location, new Callback(){
-
-            @Override
-            public void onFailure(Call call, IOException e){
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) {
-
-                mVets = yelpService.processResults(response);
-
-
-                VetActivity.this.runOnUiThread(new Runnable(){
-                    @Override
-                    public void run(){
-                        mAdapter = new VetListAdapter(getApplicationContext(), mVets);
-                        mVetList.setAdapter(mAdapter);
-                        RecyclerView.LayoutManager layoutManager =
-                                new LinearLayoutManager(VetActivity.this);
-                        mVetList.setLayoutManager(layoutManager);
-                        mVetList.setHasFixedSize(true);
-                    }
-                });
-
-            }
-        });
-    }
-
-    private void addToSharedPreferences(String location){
-        mEditor.putString(Constants.PREFERENCES_LOCATION_KEY, location).apply();
     }
 }

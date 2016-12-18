@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PetTracker</string>
+    <string name="app_name">Keepet</string>
     <string name="title_activity_medication">MedicationActivity</string>
 
     <!-- TODO: Remove or change this placeholder text -->

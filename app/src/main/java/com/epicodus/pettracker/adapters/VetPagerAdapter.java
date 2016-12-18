@@ -23,7 +23,7 @@ public class VetPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position){
-        return VetDetailFragment.newInstance(mVets.get(position));
+        return VetDetailFragment.newInstance(mVets, position);
     }
     @Override
     public int getCount(){

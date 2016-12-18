@@ -10,11 +10,4 @@
         android:id="@+id/vetList"
         />
 
-    <TextView
-        android:text="Search for vets by zip code"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:id="@+id/textView" />
-
 </FrameLayout>

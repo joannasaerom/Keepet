@@ -2,6 +2,9 @@ package com.epicodus.pettracker.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,9 +12,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.epicodus.pettracker.Constants;
 import com.epicodus.pettracker.R;
 import com.epicodus.pettracker.models.Vet;
 import com.epicodus.pettracker.ui.VetDetailActivity;
+import com.epicodus.pettracker.ui.VetDetailFragment;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
@@ -59,15 +64,18 @@ public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.VetViewH
         @Bind(R.id.vetNameTextView) TextView mVetNameText;
         @Bind(R.id.ratingTextView) TextView mRatingTextView;
 
-
-
+        private int mOrientation;
         private Context mContext;
 
         public VetViewHolder(View itemView){
             super(itemView);
             ButterKnife.bind(this, itemView);
             mContext = itemView.getContext();
+            mOrientation = itemView.getResources().getConfiguration().orientation;
 
+            if (mOrientation == Configuration.ORIENTATION_LANDSCAPE){
+                createDetailFragment(0);
+            }
 
             itemView.setOnClickListener(this);
         }
@@ -75,10 +83,14 @@ public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.VetViewH
         @Override
         public void onClick(View v){
             int itemPosition = getLayoutPosition();
-            Intent intent = new Intent(mContext, VetDetailActivity.class);
-            intent.putExtra("position", itemPosition);
-            intent.putExtra("vets", Parcels.wrap(mVets));
-            mContext.startActivity(intent);
+            if (mOrientation == Configuration.ORIENTATION_LANDSCAPE){
+                createDetailFragment(itemPosition);
+            } else{
+                Intent intent = new Intent(mContext, VetDetailActivity.class);
+                intent.putExtra(Constants.EXTRA_KEY_POSITION, itemPosition);
+                intent.putExtra(Constants.EXTRA_KEY_VETS, Parcels.wrap(mVets));
+                mContext.startActivity(intent);
+            }
         }
 
         public void bindVet(Vet vet){
@@ -91,6 +103,13 @@ public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.VetViewH
                     .resize(MAX_WIDTH, MAX_HEIGHT)
                     .centerCrop()
                     .into(mVetImageView);
+        }
+
+        private void createDetailFragment(int position){
+            VetDetailFragment detailFragment = VetDetailFragment.newInstance(mVets, position);
+            FragmentTransaction ft = ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.vetDetailContainer, detailFragment);
+            ft.commit();
         }
     }
 }

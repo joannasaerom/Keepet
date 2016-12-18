@@ -38,7 +38,7 @@ import okhttp3.Response;
  */
 public class VetFragment extends Fragment {
     @Bind(R.id.vetList) RecyclerView mVetList;
-    @Bind(R.id.textView) TextView mText;
+//    @Bind(R.id.textView) TextView mText;
 
     public ArrayList<Vet> mVets = new ArrayList<>();
     private SharedPreferences mSharedPreferences;
@@ -66,8 +66,8 @@ public class VetFragment extends Fragment {
 
         ButterKnife.bind(this, view);
 
-        Typeface rampung = Typeface.createFromAsset(getActivity().getAssets(), "fonts/theboldfont.ttf");
-        mText.setTypeface(rampung);
+//        Typeface rampung = Typeface.createFromAsset(getActivity().getAssets(), "fonts/theboldfont.ttf");
+//        mText.setTypeface(rampung);
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
@@ -112,7 +112,7 @@ public class VetFragment extends Fragment {
     }
 
     private void getVets(String location){
-        mText.setVisibility(View.GONE);
+//        mText.setVisibility(View.GONE);
 
         final YelpService yelpService = new YelpService();
         yelpService.findVets(location, new Callback(){

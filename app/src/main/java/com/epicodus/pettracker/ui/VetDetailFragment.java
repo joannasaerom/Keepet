@@ -33,6 +33,7 @@ import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import butterknife.Bind;
@@ -56,21 +57,24 @@ public class VetDetailFragment extends Fragment implements View.OnClickListener{
     private String mPetPushId;
     private Pet currentPet;
     private Vet mVet;
+    private ArrayList<Vet> mVets;
+    private int mPosition;
 
-    public static VetDetailFragment newInstance(Vet vet) {
+    public static VetDetailFragment newInstance(ArrayList<Vet> vets, Integer position) {
         VetDetailFragment vetDetailFragment = new VetDetailFragment();
         Bundle args = new Bundle();
-        args.putParcelable("vet", Parcels.wrap(vet));
+        args.putParcelable(Constants.EXTRA_KEY_VETS, Parcels.wrap(vets));
+        args.putInt(Constants.EXTRA_KEY_POSITION, position);
         vetDetailFragment.setArguments(args);
         return vetDetailFragment;
     }
 
-
-
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        mVet = Parcels.unwrap(getArguments().getParcelable("vet"));
+        mVets = Parcels.unwrap(getArguments().getParcelable(Constants.EXTRA_KEY_VETS));
+        mPosition = getArguments().getInt(Constants.EXTRA_KEY_POSITION);
+        mVet = mVets.get(mPosition);
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         mPetPushId = mSharedPreferences.getString(Constants.PREFERENCES_PETPUSHID_KEY, null);

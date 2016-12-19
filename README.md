@@ -1,9 +1,10 @@
-# PetTracker
+# Keepet
 ####_Joanna Anderson_
 
 ##Description
-An android app to keep track of your pets. Allows users to keep track of pet's medication and weight. Users are also able to search for vets nearby. The app utilizes the Yelp API to find vets near the user.
-<img src="mainpage.png"><img src="petpage.png">
+An android app to keep track of your pets. Allows users to keep track of pet's medication and weight. Users are also able to search for vets nearby and save vet information for quick access. The app utilizes the Yelp API to find vets near the user.
+
+<img src="mainpage.png" width="275px"><img src="vetpage.png" width="275px"><img src="newpetpage.png" width="275px">
 
 ## Installation
 **To download the project**

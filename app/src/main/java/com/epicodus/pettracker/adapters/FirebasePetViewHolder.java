@@ -42,6 +42,7 @@ public class FirebasePetViewHolder extends RecyclerView.ViewHolder implements Vi
         mContext = itemView.getContext();
         itemView.setOnClickListener(this);
 
+        //instantiate shared preferences to store pet id
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
         mEditor = mSharedPreferences.edit();
 
@@ -49,21 +50,24 @@ public class FirebasePetViewHolder extends RecyclerView.ViewHolder implements Vi
 
     public void bindPet(Pet pet){
         TextView petNameTextView = (TextView) mView.findViewById(R.id.petName);
-
         petNameTextView.setText(pet.getName());
     }
 
     @Override
     public void onClick(View v){
         final ArrayList<Pet> pets = new ArrayList<>();
+
+        //get current user information to get their user id
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = user.getUid();
 
+        //create database reference to identify the node where the data needs to be saved
         DatabaseReference ref = FirebaseDatabase
                 .getInstance()
                 .getReference(Constants.FIREBASE_CHILD_PETS)
                 .child(uid);
 
+        //creates a new list of pets when data changes in the database
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

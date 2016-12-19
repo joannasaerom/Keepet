@@ -55,8 +55,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         ButterKnife.bind(this);
 
+        //retrieve pet data from pet list activity
         mPet = Parcels.unwrap(getIntent().getParcelableExtra("pet"));
 
+        //if mPet is not null, binds information about mPet to the view
         if (mPet != null){
             DateFormat df = new SimpleDateFormat("MMM dd");
             Date birthDate = mPet.getBirthdate();
@@ -80,12 +82,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
 
-
             mPetName.setText(mPet.getName() + " / " + genderShortened);
             mBirthDate.setText("Birthdate: " + stringDate);
         }
 
-
+        //custom font
         Typeface rampung = Typeface.createFromAsset(getAssets(), "fonts/theboldfont.ttf");
         mPetName.setTypeface(rampung);
         mBirthDate.setTypeface(rampung);
@@ -93,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mMedicationButton.setTypeface(rampung);
         mVetButton.setTypeface(rampung);
 
+        //add click listener events to views
         mWeightButton.setOnClickListener(this);
         mMedicationButton.setOnClickListener(this);
         mAddPet.setClickable(true);
@@ -100,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mVetButton.setOnClickListener(this);
     }
 
+    //inflate overflow menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
@@ -150,6 +153,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    //logs user out of application using Firebase
     private void logout(){
         FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
@@ -158,6 +162,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         finish();
     }
 
+    //decode imageUrl stored in Firebase into Bitmap
     public static Bitmap decodeFromFirebase64(String image) throws IOException {
         byte[] decodedByteArray = android.util.Base64.decode(image, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(decodedByteArray, 0, decodedByteArray.length);

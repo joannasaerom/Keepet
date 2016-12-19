@@ -36,22 +36,24 @@ public class PetListActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pet_list);
 
-
         ButterKnife.bind(this);
 
+        //custom font
         Typeface rampung = Typeface.createFromAsset(getAssets(), "fonts/theboldfont.ttf");
         mPageTitle.setTypeface(rampung);
 
+        //get current user from Firebase
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = user.getUid();
 
+        //create database reference to populate the adapter
         mPetReference = FirebaseDatabase
                 .getInstance()
                 .getReference(Constants.FIREBASE_CHILD_PETS)
                 .child(uid);
         setUpFirebaseAdapter();
-        mAddPetButton.setOnClickListener(this);
 
+        mAddPetButton.setOnClickListener(this);
     }
     @Override
     public void onClick(View v){
@@ -64,11 +66,14 @@ public class PetListActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        //ensures adapter will stop listening to changes in Firebase when we move away from the activity
         mFirebaseAdapter.cleanup();
     }
 
     private void setUpFirebaseAdapter() {
         mFirebaseAdapter = new FirebaseRecyclerAdapter<Pet, FirebasePetViewHolder>(Pet.class, R.layout.pet_list_item, FirebasePetViewHolder.class, mPetReference) {
+
+            //bind data to view in ViewHolder
             @Override
             protected void populateViewHolder(FirebasePetViewHolder viewHolder, Pet model, int position) {
             viewHolder.bindPet(model);

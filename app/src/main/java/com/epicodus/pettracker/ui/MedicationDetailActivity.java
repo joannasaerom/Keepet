@@ -25,10 +25,12 @@ public class MedicationDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_medication_detail);
         ButterKnife.bind(this);
 
+        //custom font
         Typeface rampung = Typeface.createFromAsset(getAssets(), "fonts/theboldfont.ttf");
         medicationNameTextView.setTypeface(rampung);
         medicationDetailTextView.setTypeface(rampung);
 
+        //retrieve medication object from medication activity
         mMedication = Parcels.unwrap(getIntent().getParcelableExtra("medication"));
 
         medicationNameTextView.setText(mMedication.getName());

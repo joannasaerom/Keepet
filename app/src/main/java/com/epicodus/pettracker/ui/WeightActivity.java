@@ -58,15 +58,19 @@ public class WeightActivity extends AppCompatActivity implements View.OnClickLis
         final ArrayList<Weight> weights = new ArrayList<>();
         mPet = Parcels.unwrap(getIntent().getParcelableExtra("pet"));
 
+        //custom font
         Typeface rampung = Typeface.createFromAsset(getAssets(), "fonts/theboldfont.ttf");
         mTodayDate.setTypeface(rampung);
         mWeight.setTypeface(rampung);
         mWeightButton.setTypeface(rampung);
         mLbs.setTypeface(rampung);
 
+        //instantiate graph
         graphView = (GraphView) findViewById(R.id.graph);
+        //create new LineGraphSeries which will be filled with the Firebase data
         series = new LineGraphSeries<DataPoint>();
 
+        //database reference to retrieve weight information from the right node
         DatabaseReference ref = FirebaseDatabase
                 .getInstance()
                 .getReference(Constants.FIREBASE_CHILD_WEIGHTS)
@@ -82,9 +86,11 @@ public class WeightActivity extends AppCompatActivity implements View.OnClickLis
                     long unixTime = weight.getWeightDate().getTime();
                     float petWeight = weight.getWeight();
 
+                    //populates graph with data from Firebase
                     series.appendData(new DataPoint(unixTime, petWeight), false, 100);
                 }
 
+                //settings for graph
                 graphView.addSeries(series);
                 graphView.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(WeightActivity.this));
                 long today = System.currentTimeMillis();
@@ -94,6 +100,7 @@ public class WeightActivity extends AppCompatActivity implements View.OnClickLis
                 graphView.getViewport().setXAxisBoundsManual(true);
                 graphView.getGridLabelRenderer().setHumanRounding(false);
 
+                //settings for line in graph
                 series.setDrawDataPoints(true);
                 series.setDataPointsRadius(10);
                 series.setThickness(8);
@@ -125,6 +132,7 @@ public class WeightActivity extends AppCompatActivity implements View.OnClickLis
             String petId = mPet.getPushId();
             Weight newWeight = new Weight(todayDate, weightInt, petId);
 
+            //create reference in database where weight will be saved
             DatabaseReference weightRef = FirebaseDatabase
                     .getInstance()
                     .getReference(Constants.FIREBASE_CHILD_WEIGHTS)

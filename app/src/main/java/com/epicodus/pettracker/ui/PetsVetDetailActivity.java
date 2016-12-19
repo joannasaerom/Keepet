@@ -44,13 +44,14 @@ public class PetsVetDetailActivity extends AppCompatActivity implements View.OnC
         mPet = Parcels.unwrap(getIntent().getParcelableExtra("pet"));
         mVet = mPet.getVet();
 
-//
-//        Typeface rampung = Typeface.createFromAsset(getAssets(), "fonts/Rampung.ttf");
-//        mNameLabel.setTypeface(rampung);
-//        mWebsiteLabel.setTypeface(rampung);
-//        mPhoneLabel.setTypeface(rampung);
-//        mAddressLabel.setTypeface(rampung);
+        //set custom font
+        Typeface rampung = Typeface.createFromAsset(getAssets(), "fonts/Rampung.ttf");
+        mNameLabel.setTypeface(rampung);
+        mWebsiteLabel.setTypeface(rampung);
+        mPhoneLabel.setTypeface(rampung);
+        mAddressLabel.setTypeface(rampung);
 
+        //generate image from vet object
         Picasso.with(PetsVetDetailActivity.this)
                 .load(mVet.getImageUrl())
                 .resize(MAX_WIDTH, MAX_HEIGHT)
@@ -64,7 +65,6 @@ public class PetsVetDetailActivity extends AppCompatActivity implements View.OnC
         mNameLabel.setText(mVet.getName());
         mPhoneLabel.setText(mVet.getPhone());
         mAddressLabel.setText(android.text.TextUtils.join(", ", mVet.getAddress()));
-
 
     }
 

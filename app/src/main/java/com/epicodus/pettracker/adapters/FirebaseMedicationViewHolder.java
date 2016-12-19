@@ -2,6 +2,7 @@ package com.epicodus.pettracker.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -39,7 +40,6 @@ public class FirebaseMedicationViewHolder extends RecyclerView.ViewHolder implem
     public void bindMedication(Medication medication){
         mMedication = medication;
         TextView medicationNameTextView = (TextView) mView.findViewById(R.id.medicationName);
-
         medicationNameTextView.setText(medication.getName());
     }
 
@@ -47,11 +47,14 @@ public class FirebaseMedicationViewHolder extends RecyclerView.ViewHolder implem
     public void onClick(View v){
         final ArrayList<Medication> medications = new ArrayList<>();
         String petId = mMedication.getPetId();
+
+        //get reference to database
         DatabaseReference ref = FirebaseDatabase
                 .getInstance()
                 .getReference(Constants.FIREBASE_CHILD_MEDICATIONS)
                 .child(petId);
 
+        //generate new array list of medications each time the database node gets updated
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

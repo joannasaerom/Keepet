@@ -40,7 +40,6 @@ import okhttp3.Response;
  */
 public class VetFragment extends Fragment {
     @Bind(R.id.vetList) RecyclerView mVetList;
-//    @Bind(R.id.textView) TextView mText;
 
     public ArrayList<Vet> mVets = new ArrayList<>();
     private SharedPreferences mSharedPreferences;
@@ -58,12 +57,13 @@ public class VetFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         setHasOptionsMenu(true);
-
     }
 
     @Override
     public void onAttach(Context context){
         super.onAttach(context);
+
+
         try {
             mOnVetSelectedListener = (OnVetSelectedListener) context;
         } catch (ClassCastException e){
@@ -78,17 +78,15 @@ public class VetFragment extends Fragment {
 
         ButterKnife.bind(this, view);
 
-//        Typeface rampung = Typeface.createFromAsset(getActivity().getAssets(), "fonts/theboldfont.ttf");
-//        mText.setTypeface(rampung);
-
+        //access shared preferences to check if zip code was previously stored in the phone
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
 
+        //make API call if zip code already exists
         if (mRecentAddress != null){
             getVets(mRecentAddress);
         }
 
-        // Inflate the layout for this fragment
         return view;
     }
 
@@ -104,13 +102,14 @@ public class VetFragment extends Fragment {
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            //executes code within code block when user submits the query
             @Override
             public boolean onQueryTextSubmit(String query){
                 addToSharedPreferences(query);
                 getVets(query);
                 return false;
             }
-
+            //left blank because we don't want to call the api with each text change
             @Override
             public boolean onQueryTextChange(String newText){
                 return false;
@@ -124,8 +123,7 @@ public class VetFragment extends Fragment {
     }
 
     private void getVets(String location){
-//        mText.setVisibility(View.GONE);
-
+        //make API call
         final YelpService yelpService = new YelpService();
         yelpService.findVets(location, new Callback(){
 
@@ -139,7 +137,7 @@ public class VetFragment extends Fragment {
 
                 mVets = yelpService.processResults(response);
 
-
+                //switch to UI thread to populate view with data returned from api call
                 getActivity().runOnUiThread(new Runnable(){
                     @Override
                     public void run(){

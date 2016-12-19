@@ -45,6 +45,7 @@ import butterknife.ButterKnife;
 public class VetDetailFragment extends Fragment implements View.OnClickListener{
     private static final int MAX_WIDTH = 400;
     private static final int MAX_HEIGHT = 300;
+
     @Bind(R.id.vetImageView) ImageView mImageLabel;
     @Bind(R.id.vetNameTextView) TextView mNameLabel;
     @Bind(R.id.ratingTextView) TextView mRatingLabel;

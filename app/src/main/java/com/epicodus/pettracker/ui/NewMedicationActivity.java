@@ -38,6 +38,7 @@ public class NewMedicationActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        //custom font
         Typeface rampung = Typeface.createFromAsset(getAssets(), "fonts/theboldfont.ttf");
         mMedicationName.setTypeface(rampung);
         mMedicationDetail.setTypeface(rampung);
@@ -46,14 +47,16 @@ public class NewMedicationActivity extends AppCompatActivity {
 
 
         mPet = Parcels.unwrap(getIntent().getParcelableExtra("pet"));
-        Log.d("NewMed", mPet.getName());
 
         mAddMedicine.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                String petId = mPet.getPushId();
                 String name = mMedicationName.getText().toString();
                 String detail = mMedicationDetail.getText().toString();
                 String reminder = mReminder.getText().toString();
+
+                //validation to make sure all fields are filled out
                 if (name.equals("")){
                     mMedicationName.setError("Please enter medication name");
                     return;
@@ -63,15 +66,15 @@ public class NewMedicationActivity extends AppCompatActivity {
                     return;
                 }
 
-                String petId = mPet.getPushId();
-
                 Medication medication = new Medication(name, detail, reminder, petId);
 
+                //reference to database where medication should be saved
                 DatabaseReference medicationRef = FirebaseDatabase
                         .getInstance()
                         .getReference(Constants.FIREBASE_CHILD_MEDICATIONS)
                         .child(petId);
 
+                //saves medication to database
                 DatabaseReference pushRef = medicationRef.push();
                 String pushId = pushRef.getKey();
                 medication.setPushId(pushId);

@@ -45,14 +45,13 @@
 
     <Button
         android:text="Add"
-        android:layout_below="@id/reminder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="40dp"
         android:background="@color/colorBackground"
         android:textColor="@color/colorText"
         android:id="@+id/addMedicine"
-        android:layout_marginTop="50dp"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

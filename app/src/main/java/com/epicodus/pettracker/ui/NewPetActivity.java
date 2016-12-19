@@ -55,11 +55,10 @@ public class NewPetActivity extends AppCompatActivity implements View.OnClickLis
 
         ButterKnife.bind(this);
 
-        mAddPet.setOnClickListener(this);
-        mCameraIcon.setOnClickListener(this);
-
+        //get gender array from strings XML
         Resources res = getResources();
         gender = res.getStringArray(R.array.gender);
+        //populate spinner with array data
         ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(NewPetActivity.this, android.R.layout.simple_spinner_item, gender);
         mGender.setAdapter(mAdapter);
 
@@ -67,6 +66,8 @@ public class NewPetActivity extends AppCompatActivity implements View.OnClickLis
         mPetName.setTypeface(rampung);
         mAddPet.setTypeface(rampung);
 
+        mAddPet.setOnClickListener(this);
+        mCameraIcon.setOnClickListener(this);
     }
 
     @Override
@@ -74,11 +75,12 @@ public class NewPetActivity extends AppCompatActivity implements View.OnClickLis
         if (v == mAddPet){
             String name = mPetName.getText().toString();
             String gender = mGender.getSelectedItem().toString();
-
+            //get user input from date picker
             int day = mBirthdate.getDayOfMonth();
             int month = mBirthdate.getMonth();
             int year = mBirthdate.getYear();
 
+            //validation to make sure fields are filled out prior to creating a new pet object
             if (name.equals("")){
                 mPetName.setError("Please enter a name");
                 return;
@@ -87,20 +89,23 @@ public class NewPetActivity extends AppCompatActivity implements View.OnClickLis
             SimpleDateFormat df = new SimpleDateFormat("MM-dd-yyyy");
             Date birthDate = new Date(year, month, day);
 
-
+            //gets current user from Firebase
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             String uid = user.getUid();
 
+            //adds string generated from the Bitmap encoding only if image exists
             Pet newPet = new Pet(name, birthDate, gender, uid);
             if (imageUrl != null){
                 newPet.setImageUrl(imageUrl);
             }
 
+            //create a database reference to the node where pet should be saved
             DatabaseReference petRef = FirebaseDatabase
                     .getInstance()
                     .getReference(Constants.FIREBASE_CHILD_PETS)
                     .child(uid);
 
+            //add pet into database
             DatabaseReference pushRef = petRef.push();
             String pushId = pushRef.getKey();
             newPet.setPushId(pushId);
@@ -108,16 +113,16 @@ public class NewPetActivity extends AppCompatActivity implements View.OnClickLis
 
             Toast.makeText(NewPetActivity.this, "Saved", Toast.LENGTH_SHORT).show();
 
-
             Intent intent = new Intent(NewPetActivity.this, PetListActivity.class);
             startActivity(intent);
         }
+
         if (v == mCameraIcon){
             onLaunchCamera();
         }
-
     }
 
+    //Waits for camera intent to return a result and encodes the Bitmap if result returns OK
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == NewPetActivity.RESULT_OK) {
@@ -127,12 +132,16 @@ public class NewPetActivity extends AppCompatActivity implements View.OnClickLis
             imageUrl = encodeBitmap(imageBitmap);
         }
     }
+
+    //Creates an implicit intent to launch Android camera
     public void onLaunchCamera(){
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null){
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         }
     }
+
+    //Converts Bitmap into string so the image url can be saved to Firebase
     public String encodeBitmap(Bitmap bitmap){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);

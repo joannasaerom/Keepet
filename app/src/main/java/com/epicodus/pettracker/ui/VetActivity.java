@@ -25,10 +25,13 @@ public class VetActivity extends AppCompatActivity  implements OnVetSelectedList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vet);
 
+        //Checks to see if user was using this activity
         if (savedInstanceState != null){
+            //Checks to see if phone is in portrait view
             if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
                 mPosition = savedInstanceState.getInt(Constants.EXTRA_KEY_POSITION);
                 mVets = Parcels.unwrap(savedInstanceState.getParcelable(Constants.EXTRA_KEY_VETS));
+                //if position and vet is available user will be taken to the vet detail activity
                 if (mPosition != null && mVets != null){
                     Intent intent = new Intent(this, VetDetailActivity.class);
                     intent.putExtra(Constants.EXTRA_KEY_POSITION, mPosition);

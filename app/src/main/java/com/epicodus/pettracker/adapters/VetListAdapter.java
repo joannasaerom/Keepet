@@ -45,6 +45,7 @@ public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.VetViewH
         mOnVetSelectedListener = vetSelectedListener;
     }
 
+    //inflate view with the list item layout
     @Override
     public VetListAdapter.VetViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.vet_list_item, parent, false);
@@ -52,6 +53,7 @@ public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.VetViewH
         return viewHolder;
     }
 
+    //bind the data to the view
     @Override
     public void onBindViewHolder(VetListAdapter.VetViewHolder holder, int position){
         holder.bindVet(mVets.get(position));
@@ -62,6 +64,7 @@ public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.VetViewH
         return mVets.size();
     }
 
+    //VetViewHolder class to create item view
     public class VetViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         @Bind(R.id.vetImageView) ImageView mVetImageView;
         @Bind(R.id.vetNameTextView) TextView mVetNameText;
@@ -72,6 +75,7 @@ public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.VetViewH
         private ArrayList<Vet> mVets = new ArrayList<>();
         private OnVetSelectedListener mVetSelectedListener;
 
+        //constructor
         public VetViewHolder(View itemView, ArrayList<Vet> vets, OnVetSelectedListener vetSelectedListener){
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -80,6 +84,7 @@ public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.VetViewH
             mVetSelectedListener = vetSelectedListener;
             mOrientation = itemView.getResources().getConfiguration().orientation;
 
+            //check for phone orientation to determine how to load resources
             if (mOrientation == Configuration.ORIENTATION_LANDSCAPE){
                 createDetailFragment(0);
             }
@@ -103,7 +108,6 @@ public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.VetViewH
 
         public void bindVet(Vet vet){
 
-
             mVetNameText.setText(vet.getName());
             mRatingTextView.setText("Rating: " + vet.getRating() + "/5");
             Picasso.with(mContext)
@@ -113,6 +117,7 @@ public class VetListAdapter extends RecyclerView.Adapter<VetListAdapter.VetViewH
                     .into(mVetImageView);
         }
 
+        //Creates new detail fragment when phone is in landscape mode
         private void createDetailFragment(int position){
             VetDetailFragment detailFragment = VetDetailFragment.newInstance(mVets, position);
             FragmentTransaction ft = ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction();

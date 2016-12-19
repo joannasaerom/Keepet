@@ -26,17 +26,18 @@ import se.akerfeldt.okhttp.signpost.SigningInterceptor;
 
 public class YelpService {
 
-    public static final String TAG = YelpService.class.getSimpleName();
-
     public static void findVets(String location, Callback callback){
         OkHttpOAuthConsumer consumer = new OkHttpOAuthConsumer(Constants.YELP_CONSUMER_KEY, Constants.YELP_CONSUMER_SECRET);
         consumer.setTokenWithSecret(Constants.YELP_TOKEN, Constants.YELP_TOKEN_SECRET);
 
+        //add SignPost object to OKHttp client as the signing interceptor. responsible for managing oauth_signature
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(new SigningInterceptor(consumer))
                 .build();
 
+        //create new url for api call
         HttpUrl.Builder urlBuilder = HttpUrl.parse(Constants.YELP_BASE_URL).newBuilder();
+        //add location key and value to api call
         urlBuilder.addQueryParameter(Constants.YELP_LOCATION_QUERY_PARAMETER, location);
         String url = urlBuilder.build().toString();
 
@@ -45,6 +46,7 @@ public class YelpService {
                 .build();
 
         Call call = client.newCall(request);
+        //adds call to queue to execute api call
         call.enqueue(callback);
     }
 
@@ -54,6 +56,7 @@ public class YelpService {
         try{
             String jsonData = response.body().string();
             if(response.isSuccessful()){
+                //grab JSON data from response and create a new instance of the vet object
                 JSONObject yelpJSON = new JSONObject(jsonData);
                 JSONArray businessesJSON = yelpJSON.getJSONArray("businesses");
                 for (int i = 0; i < businessesJSON.length(); i++){
